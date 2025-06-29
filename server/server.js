@@ -21,6 +21,8 @@ app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/wishlist", wishlistRoutes);
+app.use("/uploads", express.static(__dirname + "/uploads"));
+
 
 // MongoDB connect
 mongoose

@@ -26,8 +26,6 @@ export default function Products() {
     fetchProducts();
   }, [category, subcategory, sort]);
 
-
-
   return (
     <div>
       <Navbar />
@@ -92,11 +90,38 @@ export default function Products() {
                 className="block"
               >
                 <div className="shadow-md rounded-xl overflow-hidden bg-white hover:shadow-lg transition">
-                  <img
+                  {/* <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-64 object-cover"
-                  />
+                  /> */}
+                  {/* <img
+                    src={
+                      product.images?.[0]
+                        ? `http://localhost:5000/uploads/${product.images[0]}`
+                        : "/images/placeholder.jpg"
+                    }
+                    alt={product.name}
+                    className="w-full h-64 object-cover"
+                  /> */}
+                  <div className="relative w-full h-64 overflow-hidden group">
+                    {/* Image 1 - Default view */}
+                    <img
+                      src={`http://localhost:5000/uploads/${product.images?.[0]}`}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                    />
+
+                    {/* Image 2 - Slide in from right on hover */}
+                    {product.images?.[1] && (
+                      <img
+                        src={`http://localhost:5000/uploads/${product.images[1]}`}
+                        alt="alternate"
+                        className="absolute top-0 left-0 w-full h-full object-cover transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"
+                      />
+                    )}
+                  </div>
+
                   <div className="p-4">
                     <h3 className="font-semibold">{product.name}</h3>
                     <p className="text-sm text-gray-500">
@@ -104,7 +129,7 @@ export default function Products() {
                     </p>
                     <p className="font-bold mt-2">Rs. {product.price}</p>
                     <div className="flex justify-between text-sm mt-2 text-gray-600">
-                      // ❤️ Wishlist
+                      ❤️ Wishlist
                       <span
                         onClick={async (e) => {
                           e.preventDefault();
@@ -128,9 +153,7 @@ export default function Products() {
                             alert("Already in wishlist or error");
                           }
                         }}
-                      >
-                        ❤️
-                      </span>
+                      ></span>
                       <span
                         onClick={async (e) => {
                           e.preventDefault();
