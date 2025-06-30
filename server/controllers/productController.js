@@ -44,7 +44,7 @@ exports.getProductById = async (req, res) => {
 // POST Create Product (with multiple image upload)
 exports.createProduct = async (req, res) => {
   try {
-    const { name, description, price, category, subcategory, inStock } =
+    const { name, description, price, category, subcategory, inStock, weight } =
       req.body;
 
     const imagePaths = req.files.map((file) => file.filename); // Multer files
@@ -72,4 +72,51 @@ exports.createProduct = async (req, res) => {
 exports.deleteProduct = async (req, res) => {
   await Product.findByIdAndDelete(req.params.id);
   res.status(204).end();
+};
+
+// PUT /api/products/:id
+exports.updateProduct = async (req, res) => {
+  try {
+    const {
+      name,
+      description,
+      price,
+      weight,
+      category,
+      subcategory,
+      inStock,
+    } = req.body;
+
+    // Collect new image filenames if uploaded
+    let updatedImages = [];
+    if (req.files && req.files.length > 0) {
+      updatedImages = req.files.map((file) => file.filename);
+    }
+
+    const updateData = {
+      ...(name && { name }),
+      ...(description && { description }),
+      ...(price && { price }),
+      ...(weight && { weight }),
+      ...(category && { category }),
+      ...(subcategory && { subcategory }),
+      ...(inStock !== undefined && { inStock }),
+      ...(updatedImages.length > 0 && { images: updatedImages }),
+    };
+
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      updateData,
+      { new: true }
+    );
+
+    if (!updatedProduct) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    res.status(200).json(updatedProduct);
+  } catch (err) {
+    console.error("Error updating product:", err);
+    res.status(500).json({ error: "Failed to update product" });
+  }
 };

@@ -5,6 +5,7 @@ const {
   getProductById,
   createProduct,
   deleteProduct,
+  updateProduct
 } = require("../controllers/productController");
 const upload = require("../config/multer");
 
@@ -19,5 +20,18 @@ router.get("/:id", getProductById);
 
 // Delete a product
 router.delete("/:id", deleteProduct);
+
+// Updaye a product
+router.put("/:id", upload.array("images", 5), updateProduct);
+
+// routes/productRoutes.js
+router.get("/subcategories", async (req, res) => {
+  try {
+    const subcategories = await Product.distinct("subcategory");
+    res.json(subcategories);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch subcategories" });
+  }
+});
 
 module.exports = router;

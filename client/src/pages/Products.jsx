@@ -89,101 +89,74 @@ export default function Products() {
                 key={product._id}
                 className="block"
               >
-                <div className="shadow-md rounded-xl overflow-hidden bg-white hover:shadow-lg transition">
-                  {/* <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-64 object-cover"
-                  /> */}
-                  {/* <img
-                    src={
-                      product.images?.[0]
-                        ? `http://localhost:5000/uploads/${product.images[0]}`
-                        : "/images/placeholder.jpg"
-                    }
-                    alt={product.name}
-                    className="w-full h-64 object-cover"
-                  /> */}
+                <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition relative">
+                  {/* Heart Icon */}
+                  <div className="absolute top-3 right-3 z-10 text-gray-300 hover:text-red-500 text-xl">
+                    ❤️
+                  </div>
+
+                  {/* Image with hover slide */}
                   <div className="relative w-full h-64 overflow-hidden group">
-                    {/* Image 1 - Default view */}
                     <img
                       src={`http://localhost:5000/uploads/${product.images?.[0]}`}
                       alt={product.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-all duration-500"
                     />
-
-                    {/* Image 2 - Slide in from right on hover */}
                     {product.images?.[1] && (
                       <img
                         src={`http://localhost:5000/uploads/${product.images[1]}`}
-                        alt="alternate"
+                        alt="hover preview"
                         className="absolute top-0 left-0 w-full h-full object-cover transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"
                       />
                     )}
                   </div>
 
-                  <div className="p-4">
-                    <h3 className="font-semibold">{product.name}</h3>
-                    <p className="text-sm text-gray-500">
-                      {product.category} - {product.subcategory}
-                    </p>
-                    <p className="font-bold mt-2">Rs. {product.price}</p>
-                    <div className="flex justify-between text-sm mt-2 text-gray-600">
-                      ❤️ Wishlist
-                      <span
-                        onClick={async (e) => {
-                          e.preventDefault();
-                          if (!isLoggedIn()) {
-                            alert("Login required to save to wishlist.");
-                            return;
-                          }
-
-                          try {
-                            await axios.post(
-                              "http://localhost:5000/api/wishlist/add",
-                              { productId: product._id },
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${getToken()}`,
-                                },
-                              }
-                            );
-                            alert("Added to wishlist 💖");
-                          } catch {
-                            alert("Already in wishlist or error");
-                          }
-                        }}
-                      ></span>
-                      <span
-                        onClick={async (e) => {
-                          e.preventDefault();
-                          if (!isLoggedIn()) {
-                            alert("Login required to add to cart.");
-                            return;
-                          }
-
-                          try {
-                            await axios.post(
-                              "http://localhost:5000/api/cart/add",
-                              {
-                                productId: product._id,
-                                quantity: 1,
+                  {/* Add to Cart Button */}
+                  <div className="px-4 pt-3 pb-2 text-center">
+                    <button
+                      onClick={async (e) => {
+                        e.preventDefault();
+                        if (!isLoggedIn()) {
+                          alert("Login required to add to cart.");
+                          return;
+                        }
+                        try {
+                          await axios.post(
+                            "http://localhost:5000/api/cart/add",
+                            {
+                              productId: product._id,
+                              quantity: 1,
+                            },
+                            {
+                              headers: {
+                                Authorization: `Bearer ${getToken()}`,
                               },
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${getToken()}`,
-                                },
-                              }
-                            );
-                            alert("Added to cart ✅");
-                          } catch {
-                            alert("Error adding to cart");
-                          }
-                        }}
-                      >
-                        🛒
-                      </span>
-                    </div>
+                            }
+                          );
+                          alert("Added to cart ✅");
+                        } catch {
+                          alert("Error adding to cart");
+                        }
+                      }}
+                      className="bg-bronze text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-[#a5714c] transition"
+                    >
+                      Add To Cart
+                    </button>
+                  </div>
+
+                  {/* Product Info */}
+                  <div className="px-4 pb-4 text-center">
+                    <h3 className="font-medium text-[15px]">{product.name}</h3>
+                    <p className="font-bold text-lg mt-1">
+                      Rs.{" "}
+                      {product.price
+                        ? product.price.toLocaleString("en-IN")
+                        : "N/A"}
+                    </p>
+
+                    <p className="text-sm text-red-500 font-medium">
+                      Only 1 left!
+                    </p>
                   </div>
                 </div>
               </Link>
