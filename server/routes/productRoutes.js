@@ -5,12 +5,23 @@ const {
   getProductById,
   createProduct,
   deleteProduct,
-  updateProduct
+  updateProduct,
+  getAllSubcategories,
 } = require("../controllers/productController");
 const upload = require("../config/multer");
 
+// routes/productRoutes.js
+router.get("/subcategories", getAllSubcategories);
+
 // Create product with multiple images
-router.post("/", upload.array("images", 5), createProduct);
+router.post(
+  "/",
+  upload.fields([
+    { name: "images", maxCount: 5 },
+    { name: "tryOnOverlay", maxCount: 1 },
+  ]),
+  createProduct
+);
 
 // Get all products (with filtering/search/sort)
 router.get("/", getAllProducts);
@@ -22,16 +33,14 @@ router.get("/:id", getProductById);
 router.delete("/:id", deleteProduct);
 
 // Updaye a product
-router.put("/:id", upload.array("images", 5), updateProduct);
-
-// routes/productRoutes.js
-router.get("/subcategories", async (req, res) => {
-  try {
-    const subcategories = await Product.distinct("subcategory");
-    res.json(subcategories);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch subcategories" });
-  }
-});
+// Update a product
+router.put(
+  "/:id",
+  upload.fields([
+    { name: "images", maxCount: 5 },
+    { name: "tryOnOverlay", maxCount: 1 },
+  ]),
+  updateProduct
+);
 
 module.exports = router;

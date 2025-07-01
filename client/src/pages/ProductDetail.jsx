@@ -104,16 +104,17 @@ export default function ProductDetail() {
             </span>
           </button>
           {/* Conditional Try-On Preview */}
-          {showTryOn && product.virtualTryOn ? (
-            <TryOnPreview
-              imageType={product.virtualTryOn.type}
-              imageFile={product.virtualTryOn.image}
-            />
-          ) : (
-            <p className="text-red-500 mt-2">
-              Try-On not available for this product.
-            </p>
-          )}
+          {showTryOn &&
+            (product.tryOnType && product.tryOnOverlay ? (
+              <TryOnPreview
+                imageType={product.tryOnType}
+                imageFile={product.tryOnOverlay}
+              />
+            ) : (
+              <p className="text-red-500 mt-2">
+                Try-On not available for this product.
+              </p>
+            ))}
 
           {/* or "necklace" */}
           {/* {showTryOn && (

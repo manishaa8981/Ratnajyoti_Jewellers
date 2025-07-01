@@ -23,7 +23,7 @@ export default function TryOnPreview({ imageType = "earring", imageFile }) {
   if (imageType === "ring") {
     useHandMesh(videoRef, canvasRef, imageFile);
   } else {
-    useFaceMesh(videoRef, canvasRef, imageFile);
+    useFaceMesh(videoRef, canvasRef, imageFile, imageType); // 🎯 pass both file and type
   }
 
   return (

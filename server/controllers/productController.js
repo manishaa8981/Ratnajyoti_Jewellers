@@ -46,8 +46,11 @@ exports.createProduct = async (req, res) => {
   try {
     const { name, description, price, category, subcategory, inStock, weight } =
       req.body;
+    const tryOnType = req.body.tryOnType?.trim(); // this prevents validation error
 
     const imagePaths = req.files.map((file) => file.filename); // Multer files
+    // Handle tryOnOverlay file (optional)
+    const tryOnOverlayFile = req.files?.tryOnOverlay?.[0]?.filename || null;
 
     const newProduct = new Product({
       name,
@@ -58,6 +61,8 @@ exports.createProduct = async (req, res) => {
       subcategory,
       images: imagePaths,
       inStock,
+      tryOnType,
+      tryOnOverlay: tryOnOverlayFile,
     });
 
     await newProduct.save();
@@ -77,21 +82,12 @@ exports.deleteProduct = async (req, res) => {
 // PUT /api/products/:id
 exports.updateProduct = async (req, res) => {
   try {
-    const {
-      name,
-      description,
-      price,
-      weight,
-      category,
-      subcategory,
-      inStock,
-    } = req.body;
+    const { name, description, price, weight, category, subcategory, inStock } =
+      req.body;
 
-    // Collect new image filenames if uploaded
-    let updatedImages = [];
-    if (req.files && req.files.length > 0) {
-      updatedImages = req.files.map((file) => file.filename);
-    }
+    const imagePaths = req.files?.images?.map((file) => file.filename) || [];
+    const tryOnOverlayFile = req.files?.tryOnOverlay?.[0]?.filename || null;
+    const tryOnType = req.body.tryOnType?.trim(); // this prevents validation error
 
     const updateData = {
       ...(name && { name }),
@@ -101,7 +97,9 @@ exports.updateProduct = async (req, res) => {
       ...(category && { category }),
       ...(subcategory && { subcategory }),
       ...(inStock !== undefined && { inStock }),
-      ...(updatedImages.length > 0 && { images: updatedImages }),
+      ...(tryOnType && { tryOnType }),
+      ...(imagePaths.length > 0 && { images: imagePaths }),
+      ...(tryOnOverlayFile && { tryOnOverlay: tryOnOverlayFile }),
     };
 
     const updatedProduct = await Product.findByIdAndUpdate(
@@ -119,4 +117,9 @@ exports.updateProduct = async (req, res) => {
     console.error("Error updating product:", err);
     res.status(500).json({ error: "Failed to update product" });
   }
+};
+
+exports.getAllSubcategories = async (req, res) => {
+  const subcategories = await Product.distinct("subcategory");
+  res.json(subcategories);
 };

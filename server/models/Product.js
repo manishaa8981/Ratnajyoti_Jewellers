@@ -14,6 +14,15 @@ const productSchema = new mongoose.Schema({
   color: String, // e.g. Yellow
   dimensions: String, // e.g. 5.8 cm
   sizeOptions: [String],
+  tryOnType: {
+    type: String,
+    enum: ["earring", "necklace", "ring"],
+    required: false, // optional for now
+  },
+  tryOnOverlay: {
+    type: String, // e.g. "diamond_ring_01.png"
+    required: false,
+  },
 });
 
 module.exports = mongoose.model("Product", productSchema);
