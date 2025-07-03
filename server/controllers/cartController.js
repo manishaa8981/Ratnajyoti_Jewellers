@@ -1,18 +1,27 @@
 const Cart = require("../models/Cart");
 
 exports.getCart = async (req, res) => {
-  const cart = await Cart.findOne({ userId: req.user.id }).populate(
-    "items.productId"
-  );
+  try {
+    const cart = await Cart.findOne({ userId: req.user.id }).populate(
+      "items.productId"
+    );
 
-  if (!cart) return res.json({ cart: [] });
+    if (!cart) {
+      return res.json({ cart: [] });
+    }
 
-  const cartItems = cart.items.map((item) => ({
-    ...item.productId._doc,
-    quantity: item.quantity,
-  }));
+    const validItems = cart.items
+      .filter((item) => item.productId) // ✅ Only keep items where product exists
+      .map((item) => ({
+        ...item._doc,
+        product: item.productId, // Rename for frontend convenience
+      }));
 
-  res.json({ cart: cartItems });
+    res.json({ cart: validItems });
+  } catch (err) {
+    console.error("Error fetching cart:", err);
+    res.status(500).json({ error: "Failed to fetch cart" });
+  }
 };
 
 exports.addToCart = async (req, res) => {
