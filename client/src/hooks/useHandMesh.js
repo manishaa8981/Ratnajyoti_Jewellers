@@ -11,7 +11,7 @@ export default function useHandMesh(
     if (!videoRef.current || !canvasRef.current) return;
 
     const img = new Image();
-    img.src = `/images/${imageFile}`;
+    img.src = `http://localhost:5000/uploads/${imageFile}`;
 
     const hands = new Hands({
       locateFile: (file) =>
