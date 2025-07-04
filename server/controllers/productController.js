@@ -44,12 +44,22 @@ exports.getProductById = async (req, res) => {
 // POST Create Product (with multiple image upload)
 exports.createProduct = async (req, res) => {
   try {
-    const { name, description, price, category, subcategory, inStock, weight } =
-      req.body;
-    const tryOnType = req.body.tryOnType?.trim(); // this prevents validation error
+    const {
+      name,
+      description,
+      price,
+      category,
+      subcategory,
+      inStock,
+      weight,
+      tryOnType,
+    } = req.body;
 
-    const imagePaths = req.files.map((file) => file.filename); // Multer files
-    // Handle tryOnOverlay file (optional)
+    // Handle main images (array)
+    const imageFiles = req.files?.images || [];
+    const imagePaths = imageFiles.map((file) => file.filename);
+
+    // Handle single try-on overlay (optional)
     const tryOnOverlayFile = req.files?.tryOnOverlay?.[0]?.filename || null;
 
     const newProduct = new Product({
@@ -61,7 +71,7 @@ exports.createProduct = async (req, res) => {
       subcategory,
       images: imagePaths,
       inStock,
-      tryOnType,
+      tryOnType: tryOnType?.trim(),
       tryOnOverlay: tryOnOverlayFile,
     });
 
