@@ -1,4 +1,5 @@
 import axios from "axios";
+import KhaltiCheckout from "khalti-checkout-web";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -22,31 +23,62 @@ export default function CheckoutPage() {
     postalCode: "",
     phone: "",
   });
+  const handleKhaltiPayment = () => {
+    const config = {
+      publicKey: "test_public_key_dc74c3bf8a9c4f6e87fc81243d1db27a", // 🔁 replace with your key
+      productIdentity: "ratnajyoti123",
+      productName: "Jewelry Order",
+      productUrl: "http://localhost:4001/cart",
+      eventHandler: {
+        onSuccess: async (payload) => {
+          console.log("✅ Khalti Payment Success", payload);
+          await handlePlaceOrder(payload);
+        },
+        onError: (error) => {
+          console.error("❌ Khalti Error:", error);
+        },
+        onClose: () => {
+          console.log("🔒 Khalti widget closed");
+        },
+      },
+      paymentPreference: [
+        "KHALTI",
+        "EBANKING",
+        "MOBILE_BANKING",
+        "CONNECT_IPS",
+      ],
+    };
+    const checkout = new KhaltiCheckout(config);
+    checkout.show({ amount: total * 100 }); // Khalti expects paisa
+  };
 
-  const handlePlaceOrder = async () => {
+  const handlePlaceOrder = async (khaltiPayload) => {
     setLoading(true);
     try {
-      const payload = {
+      const orderPayload = {
         items: cartItems.map((item) => ({
-          productId: item._id,
+          productId: item.product?._id || item._id,
           quantity: item.quantity,
         })),
         totalPrice: total,
-        paymentMethod,
-        recipientName,
-        recipientEmail,
-        giftMessage,
+        paymentMethod: "Khalti",
+        paymentStatus: "Paid",
+        recipientName: "Customer",
+        recipientEmail: "customer@example.com",
         address,
       };
 
-      await axios.post("http://localhost:5000/api/orders", payload, {
-        headers: { Authorization: `Bearer ${getToken()}` },
-      });
+      const res = await axios.post(
+        "http://localhost:5000/api/orders",
+        orderPayload,
+        {
+          headers: { Authorization: `Bearer ${getToken()}` },
+        }
+      );
 
-      alert("🎉 Order placed successfully!");
-      navigate("/orders");
+      alert("🎉 Order Placed Successfully!");
     } catch (err) {
-      console.error(err);
+      console.error("Order Error:", err);
       alert("Failed to place order");
     } finally {
       setLoading(false);
@@ -141,36 +173,22 @@ export default function CheckoutPage() {
         {/* Order Summary */}
         <div className="bg-[#f9f5f2] p-6 rounded-xl shadow mb-6">
           <h2 className="text-lg font-bold mb-4">Order Summary</h2>
-
-          <div className="space-y-3 text-sm text-gray-700">
-            {cartItems.map((item) => {
-              const imageUrl = item.product?.images?.[0]
-                ? `http://localhost:5000/uploads/${item.product.images[0]}`
-                : "/images/placeholder.png";
-
-              return (
-                <div key={item._id} className="flex items-center gap-3">
-                  <img
-                    src={imageUrl}
-                    alt={item.product?.name || "Product"}
-                    className="w-14 h-14 object-cover rounded"
-                  />
-                  <div className="flex-1">
-                    <p className="font-medium">{item.product?.name}</p>
-                    <p className="text-xs text-gray-500">
-                      Qty: {item.quantity} × Rs. {item.product?.price}
-                    </p>
-                  </div>
-                  <div className="font-semibold text-right">
-                    Rs. {item.quantity * item.product?.price}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <hr className="my-4" />
-
+          {cartItems.map((item) => (
+            <div
+              key={item._id}
+              className="flex justify-between text-sm text-gray-700 mb-2"
+            >
+              <span>
+                {item.product?.name || item.name} × {item.quantity}
+              </span>
+              <span>
+                Rs.{" "}
+                {item.product?.price * item.quantity ||
+                  item.price * item.quantity}
+              </span>
+            </div>
+          ))}
+          <hr className="my-3" />
           <div className="flex justify-between font-semibold text-base">
             <span>Total</span>
             <span>Rs. {total}</span>
@@ -179,10 +197,10 @@ export default function CheckoutPage() {
 
         <button
           disabled={loading}
-          onClick={handlePlaceOrder}
-          className="bg-[#b6845b] text-white font-semibold px-6 py-2 rounded-full w-full hover:opacity-90"
+          onClick={handleKhaltiPayment}
+          className="bg-[#5c2d91] text-white font-semibold px-6 py-3 rounded-full w-full hover:opacity-90"
         >
-          {loading ? "Placing Order..." : "Place Order"}
+          {loading ? "Processing..." : "Pay with Khalti"}
         </button>
       </div>
     </div>
