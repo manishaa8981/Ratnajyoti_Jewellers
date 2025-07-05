@@ -45,10 +45,33 @@ export default function useFaceMesh(
           y = 0;
 
         if (imageType === "earring") {
-          const leftEar = face[234]; // Left ear
-          x = leftEar.x * canvas.width;
-          y = leftEar.y * canvas.height;
-          ctx.drawImage(overlayImage, x - 20, y - 20, 40, 40); // Small size for earring
+          // Use better landmarks for ear lobes (these are closer to real earring points)
+          const leftEar = face[234]; // left earlobe
+          const rightEar = face[454]; // right earlobe
+
+          const leftX = leftEar.x * canvas.width;
+          const leftY = leftEar.y * canvas.height;
+          const rightX = rightEar.x * canvas.width;
+          const rightY = rightEar.y * canvas.height;
+
+          const offsetX = 10; // shift slightly inward
+          const offsetY = 10; // shift slightly downward
+
+          // Draw left earring
+          ctx.drawImage(
+            overlayImage,
+            leftX - offsetX - 20,
+            leftY + offsetY,
+            40,
+            40
+          );
+
+          // Draw right earring (mirrored)
+          ctx.save();
+          ctx.translate(rightX + offsetX + 20, rightY + offsetY);
+          ctx.scale(-1, 1);
+          ctx.drawImage(overlayImage, 0, 0, 40, 40);
+          ctx.restore();
         } else if (imageType === "necklace") {
           const chin = face[152]; // Chin landmark
           x = chin.x * canvas.width;
