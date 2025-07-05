@@ -16,7 +16,7 @@ const productSchema = new mongoose.Schema({
   sizeOptions: [String],
   tryOnType: {
     type: String,
-    enum: ["earring", "necklace", "ring"],
+    enum: ["earring", "necklace", "ring", "bangles"],
     required: false, // optional for now
   },
   tryOnOverlay: {
