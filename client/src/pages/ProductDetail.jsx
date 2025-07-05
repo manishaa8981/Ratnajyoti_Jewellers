@@ -91,7 +91,7 @@ export default function ProductDetail() {
             Rs. {product.price.toLocaleString()}
           </p>
           <div className="flex justify-center gap-6 text-sm text-gray-500 mt-1">
-            <span>{product.karat} Karat</span>
+            <span>{product.karat} 22 Karat</span>
             <span>{product.weight}g</span>
           </div>
           <button
