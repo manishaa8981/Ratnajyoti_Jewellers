@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Cart from "./pages/Cart";
+import CheckoutPage from "./pages/CheckoutPage";
 import ForgotPasswordPage from "./pages/ForgetPassword";
 import Homepage from "./pages/Home";
 import Login from "./pages/Login";
@@ -13,6 +14,7 @@ import Wishlist from "./pages/Wishlist";
 const App = () => (
   <BrowserRouter>
     <Routes>
+
       <Route path="/" element={<Homepage />} />
       <Route path="/products" element={<Products />} />
       <Route path="/product/:id" element={<ProductDetail />} />
@@ -22,6 +24,7 @@ const App = () => (
       <Route path="/register" element={<Register />} />
       <Route path="/forgetpassword" element={<ForgotPasswordPage />} />
       <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+      <Route path="/checkout" element={<CheckoutPage />} />
     </Routes>
   </BrowserRouter>
 );
