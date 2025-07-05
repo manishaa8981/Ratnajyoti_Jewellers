@@ -1,51 +1,123 @@
+import { Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
-export default function Wishlist() {
-  const [wishlist, setWishlist] = useState([]);
+export default function WishlistPage() {
+  const [wishlistItems, setWishlistItems] = useState([]);
 
+  // Load from localStorage on mount
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("wishlist")) || [];
-    setWishlist(saved);
+    setWishlistItems(saved);
   }, []);
 
+  // Remove item
   const removeFromWishlist = (id) => {
-    const updated = wishlist.filter((item) => item._id !== id);
-    setWishlist(updated);
+    const updated = wishlistItems.filter((item) => item._id !== id);
+    setWishlistItems(updated);
     localStorage.setItem("wishlist", JSON.stringify(updated));
   };
 
-  return (
-    <div>
-      <Navbar />
-      <div className="max-w-5xl mx-auto px-4 py-10">
-        <h2 className="text-2xl font-serif mb-6">Your Wishlist</h2>
+  // Add to cart
+  const addToCart = (item) => {
+    if (item.inStock) {
+      console.log(`Added ${item.name} to cart`);
+      // Your cart logic here
+    }
+  };
 
-        {wishlist.length === 0 ? (
-          <p>Your wishlist is empty.</p>
+  return (
+    <div className="min-h-screen bg-[#fefefe]">
+      <Navbar />
+
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        <div className="text-2xl  mb-6"> My Wishlist</div>
+
+        {wishlistItems.length === 0 ? (
+          <p className="text-gray-400">Your wishlist is empty.</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {wishlist.map((item) => (
-              <div
-                key={item._id}
-                className="border rounded-xl overflow-hidden shadow"
-              >
-                <Link to={`/product/${item._id}`}>
-                  <img src={item.image} className="w-full h-48 object-cover" />
-                </Link>
-                <div className="p-4">
-                  <h3 className="font-medium">{item.name}</h3>
-                  <p className="text-sm text-gray-500">Rs. {item.price}</p>
-                  <button
-                    onClick={() => removeFromWishlist(item._id)}
-                    className="text-red-600 text-sm mt-2 hover:underline"
+          <div className="overflow-x-auto rounded-lg shadow mb-4">
+            <table className="min-w-full text-sm text-left text-gray-600 bg-white border">
+              <thead className="text-xs uppercase bg-gray-100 text-gray-600 shadow-md rounded-md">
+                <tr>
+                  <th scope="col" className="px-6 py-4">
+                    Product
+                  </th>
+                  <th scope="col" className="px-6 py-4 text-center">
+                    Price
+                  </th>
+                  <th scope="col" className="px-6 py-4 text-center">
+                    Stock Status
+                  </th>
+                  <th scope="col" className="px-6 py-4 text-center">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {wishlistItems.map((item) => (
+                  <tr
+                    key={item._id}
+                    className="border-b hover:bg-gray-50 transition shadow-md rounded-md"
                   >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            ))}
+                    <td className="flex items-center gap-4 px-6 py-5">
+                      <img
+                        src={`http://localhost:5000/uploads/${item.image}`}
+                        alt={item.name}
+                        className="w-20 h-20 rounded-md object-cover border"
+                      />
+                      <div>
+                        <div className="font-semibold text-gray-800">
+                          {item.name}
+                        </div>
+                        <div className="text-xs text-gray-400">
+                          {item.category || "Jewelry"}
+                        </div>
+                      </div>
+                    </td>
+
+                    <td className="px-6 py-5 text-center font-semibold text-black">
+                      Rs. {item.price?.toLocaleString("en-IN")}
+                    </td>
+
+                    <td className="px-6 py-5 text-center ">
+                      {item.inStock ? (
+                        <span className="bg-green-100 text-green-700 px-4 py-1 rounded-full font-medium text-xs shadow-sm">
+                          In Stock
+                        </span>
+                      ) : (
+                        <span className="bg-red-100 text-red-700 px-4 py-1 rounded-full font-medium text-xs shadow-sm">
+                          Out of Stock
+                        </span>
+                      )}
+                    </td>
+
+                    <td className="px-6 py-5">
+                      <div className="flex items-center justify-center gap-3">
+                        <button
+                          onClick={() => addToCart(item)}
+                          disabled={!item.inStock}
+                          className={`px-4 py-2 rounded-full text-white font-semibold text-xs ${
+                            item.inStock
+                              ? "bg-[#b6845b] hover:bg-[#a5714c]"
+                              : "bg-gray-300 cursor-not-allowed"
+                          }`}
+                        >
+                          Add to cart
+                        </button>
+                        <button
+                          onClick={() => removeFromWishlist(item._id)}
+                          className="text-red-500 hover:text-red-700"
+                          title="Remove"
+                        >
+                          <Trash2 className="w-5 h-5" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
       </div>
