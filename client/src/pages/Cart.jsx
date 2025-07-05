@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai"; // for cross icon
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../components/Navbar";
 import { getToken } from "../utils/auth";
-
 export default function Cart() {
   const [cart, setCart] = useState([]);
   const [location, setLocation] = useState("Syuchatar");
@@ -26,12 +28,23 @@ export default function Cart() {
 
   const updateCart = (updated) => {
     setCart(updated);
-    localStorage.setItem("cart", JSON.stringify(updated));
   };
 
-  const removeFromCart = (id) => {
-    const updated = cart.filter((item) => item._id !== id);
-    updateCart(updated);
+  const removeFromCart = async (productId) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/cart/remove/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+
+      const updated = cart.filter((item) => item.product._id !== productId);
+      updateCart(updated);
+      toast.success("Removed from cart 🗑️");
+    } catch (err) {
+      toast.error("Failed to remove item from cart");
+      console.error(err);
+    }
   };
 
   const increaseQty = (id) => {
@@ -71,23 +84,10 @@ export default function Cart() {
       <Navbar />
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="flex flex-col gap-10">
-          {/* Delivery Location */}
-          <div>
-            <h2 className="text-xl font-semibold mb-2">Delivery Details</h2>
-            <select
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              className="w-full border border-amber-800 rounded px-4 py-2"
-            >
-              <option value="Syuchatar">Syuchatar</option>
-              <option value="Baneshwor">Baneshwor</option>
-              <option value="Lalitpur">Lalitpur</option>
-            </select>
-          </div>
-
+          <div className="text-2xl  mb-6"> My Cart</div>
           {/* Cart Items */}
           {cart.length === 0 ? (
-            <p className="text-gray-600 mt-6">Your cart is empty.</p>
+            <p className="text-gray-400">Your cart is empty.</p>
           ) : (
             cart.map((item) => (
               <div
@@ -129,16 +129,16 @@ export default function Cart() {
                     </button>
                   </div>
                   <button
-                    onClick={() => removeFromCart(item._id)}
+                    onClick={() => removeFromCart(item.product._id)}
                     className="text-sm text-gray-400 hover:text-red-500"
+                    title="Remove"
                   >
-                    ❌
+                    <AiOutlineClose className="text-lg" />
                   </button>
                 </div>
               </div>
             ))
           )}
-
           {/* Bottom Sticky Checkout Bar */}
           {cart.length > 0 && (
             <div className="fixed bottom-6 left-4 right-4 md:left-12 md:right-12 lg:left-20 lg:right-20 bg-white rounded-full shadow-xl flex justify-between items-center px-6 py-4 border">
