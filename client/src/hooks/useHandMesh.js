@@ -10,6 +10,10 @@ export default function useHandMesh(
   useEffect(() => {
     if (!videoRef.current || !canvasRef.current) return;
 
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
     const img = new Image();
     img.src = `http://localhost:5000/uploads/${imageFile}`;
 
@@ -27,38 +31,41 @@ export default function useHandMesh(
 
     img.onload = () => {
       hands.onResults((results) => {
-        const canvasCtx = canvasRef.current.getContext("2d");
-        canvasCtx.clearRect(
-          0,
-          0,
-          canvasRef.current.width,
-          canvasRef.current.height
-        );
+        // Set canvas size to match video
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
 
-        if (results.multiHandLandmarks.length > 0) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (
+          results.multiHandLandmarks &&
+          results.multiHandLandmarks.length > 0
+        ) {
           const landmarks = results.multiHandLandmarks[0];
 
-          const ringFinger = landmarks[12]; // Ring finger tip
-          const x = ringFinger.x * canvasRef.current.width;
-          const y = ringFinger.y * canvasRef.current.height;
+          const ringBase = landmarks[14]; // Use base of ring finger
+          const x = ringBase.x * canvas.width;
+          const y = ringBase.y * canvas.height;
 
-          canvasCtx.drawImage(img, x - 15, y - 15, 30, 30);
+          ctx.drawImage(img, x - 15, y - 15, 40, 40); // Adjust size and offset
         }
       });
+
+      const camera = new Camera(video, {
+        onFrame: async () => {
+          if (video.readyState >= 2) {
+            await hands.send({ image: video });
+          }
+        },
+        width: 640,
+        height: 480,
+      });
+
+      camera.start();
     };
 
-    const camera = new Camera(videoRef.current, {
-      onFrame: async () => {
-        await hands.send({ image: videoRef.current });
-      },
-      width: 640,
-      height: 480,
-    });
-
-    camera.start();
-
     return () => {
-      camera.stop();
+      hands.close();
     };
   }, [videoRef, canvasRef, imageFile]);
 }
