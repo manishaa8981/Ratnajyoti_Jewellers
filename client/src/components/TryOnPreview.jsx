@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import useBangleMesh from "../hooks/useBangleOverlay";
 import useFaceMesh from "../hooks/useFaceMesh";
 import useHandMesh from "../hooks/useHandMesh";
 
@@ -22,8 +23,10 @@ export default function TryOnPreview({ imageType = "earring", imageFile }) {
 
   if (imageType === "ring") {
     useHandMesh(videoRef, canvasRef, imageFile);
+  } else if (imageType === "bangles") {
+    useBangleMesh(videoRef, canvasRef, imageFile);
   } else {
-    useFaceMesh(videoRef, canvasRef, imageFile, imageType); // 🎯 pass both file and type
+    useFaceMesh(videoRef, canvasRef, imageFile, imageType); // earring / necklace
   }
 
   return (
