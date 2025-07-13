@@ -2,7 +2,6 @@ import { FaQuestionCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import CategoryGrid from "../components/categoryGrid";
 import CollectionsShowcase from "../components/collectionShowCase";
-import FeaturedCategories from "../components/FeaturedCategories";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import NewArrivals from "../components/NewArrivals";
@@ -13,8 +12,7 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-            <VideoCarouselBasicExample />
-      <FeaturedCategories />
+      <VideoCarouselBasicExample />
       <CollectionsShowcase />
       <CategoryGrid />
       <RatnajyotiWorld />
@@ -27,7 +25,6 @@ export default function Home() {
         <FaQuestionCircle className="text-2xl" />
       </Link>
       <Footer />
-
     </div>
   );
 }
