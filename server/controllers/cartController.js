@@ -70,7 +70,17 @@ exports.removeFromCart = async (req, res) => {
   res.status(200).json(cart);
 };
 
+// DELETE /api/cart/clear
 exports.clearCart = async (req, res) => {
-  await Cart.findOneAndUpdate({ userId: req.user.id }, { items: [] });
-  res.status(200).json({ message: "Cart cleared" });
+  try {
+    await Cart.deleteMany({ userId: req.user.id }); // Adjust based on your schema
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to clear cart" });
+  }
 };
+
+// exports.clearCart = async (req, res) => {
+//   await Cart.findOneAndUpdate({ userId: req.user.id }, { items: [] });
+//   res.status(200).json({ message: "Cart cleared" });
+// };

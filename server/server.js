@@ -8,7 +8,7 @@ const userRoutes = require("./routes/userRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const wishlistRoutes = require("./routes/wishlistRoutes");
-const khaltiRoutes = require("./routes/khalti");
+const khaltiRoutes = require("./routes/khaltiRoutes");
 
 dotenv.config();
 
