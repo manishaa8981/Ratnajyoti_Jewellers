@@ -18,7 +18,6 @@ const categories = [
     title: "Pendants",
     image: "/icons/pendant.jpg",
     type: "subcategory",
-    type: "category",
     value: "Pendants",
   },
   {
@@ -45,14 +44,12 @@ const categories = [
     title: "Chain",
     image: "/images/gold-chain.jpg",
     type: "subcategory",
-    type: "category",
     value: "Chain",
   },
   {
     title: "Nose Pins",
     image: "/images/nose-ring.jpg",
     type: "subcategory",
-    type: "category",
     value: "Nose Pins",
   },
 ];
@@ -78,7 +75,7 @@ export default function CategoryGrid() {
         {categories.map((item) => (
           <div
             key={item.title}
-            onClick={() => handleClick(item.value)}
+            onClick={() => handleClick(item.type, item.value)}
             className="cursor-pointer text-center bg-transparent rounded-xl  hover:shadow-md transition overflow-hidden"
           >
             {/* No rounding on image */}
