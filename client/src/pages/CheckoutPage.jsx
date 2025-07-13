@@ -1,5 +1,4 @@
 import axios from "axios";
-import KhaltiCheckout from "khalti-checkout-web";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -23,55 +22,33 @@ export default function CheckoutPage() {
     postalCode: "",
     phone: "",
   });
-  const handleKhaltiPayment = () => {
-    const config = {
-      publicKey: import.meta.env.VITE_KHALTI_PUBLIC_KEY,
-      productIdentity: "ratnajyoti123",
-      productName: "Jewelry Order",
-      productUrl: "http://localhost:4001/cart",
-      eventHandler: {
-        onSuccess: async (payload) => {
-          console.log("✅ Khalti Payment Success", payload);
 
-          try {
-            const verifyRes = await axios.post(
-              "http://localhost:5001/api/khalti/verify",
-              {
-                token: payload.token,
-                amount: payload.amount,
-              }
-            );
+  const handleKhaltiPayment = async () => {
+    setLoading(true);
+    try {
+      const orderId = `ORDER_${Date.now()}`;
 
-            if (verifyRes.data.success) {
-              console.log("✅ Khalti Payment Verified");
-              await handlePlaceOrder(payload);
-            } else {
-              alert("❌ Payment verification failed.");
-            }
-          } catch (err) {
-            alert("⚠️ Error verifying Khalti payment.");
-            console.error(err);
-          }
-        },
-        onError: (error) => {
-          console.error("❌ Khalti Error:", error);
-        },
-        onClose: () => {
-          console.log("🔒 Khalti widget closed");
-        },
-      },
-      paymentPreference: [
-        "KHALTI",
-        "EBANKING",
-        "MOBILE_BANKING",
-        "CONNECT_IPS",
-      ],
-    };
-    const checkout = new KhaltiCheckout(config);
-    checkout.show({ amount: total * 100 }); // Khalti expects paisa
+      const res = await axios.post(
+        "http://localhost:5001/api/khalti/initiate",
+        {
+          amount: total,
+          name: recipientName || "Customer",
+          email: recipientEmail || "customer@example.com",
+          phone: address.phone || "9800000000",
+          orderId,
+        }
+      );
+
+      window.location.href = res.data.payment_url;
+    } catch (err) {
+      console.error("❌ Khalti Init Error", err);
+      alert("Khalti initiation failed.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handlePlaceOrder = async (khaltiPayload) => {
+  const handlePlaceOrder = async () => {
     setLoading(true);
     try {
       const orderPayload = {
@@ -80,25 +57,23 @@ export default function CheckoutPage() {
           quantity: item.quantity,
         })),
         totalPrice: total,
-        paymentMethod: "Khalti",
-        paymentStatus: "Paid",
-        recipientName: "Customer",
-        recipientEmail: "customer@example.com",
+        paymentMethod,
+        paymentStatus:
+          paymentMethod === "Cash on Delivery" ? "Pending" : "Paid",
+        recipientName: recipientName || "Customer",
+        recipientEmail: recipientEmail || "customer@example.com",
         address,
       };
 
-      const res = await axios.post(
-        "http://localhost:5001/api/orders",
-        orderPayload,
-        {
-          headers: { Authorization: `Bearer ${getToken()}` },
-        }
-      );
+      await axios.post("http://localhost:5001/api/orders", orderPayload, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      });
 
       alert("🎉 Order Placed Successfully!");
+      navigate("/thank-you");
     } catch (err) {
       console.error("Order Error:", err);
-      alert("Failed to place order");
+      alert("Failed to place order.");
     } finally {
       setLoading(false);
     }
@@ -107,11 +82,16 @@ export default function CheckoutPage() {
   return (
     <div>
       <Navbar />
-      <div className="max-w-4xl mx-auto p-6">
-        <h1 className="text-2xl font-semibold mb-6">Checkout</h1>
+      <div className="max-w-4xl mx-auto p-6 mt-10 mb-20">
+        <h1 className="text-3xl font-semibold text-center mb-10 text-gray-800">
+          Checkout
+        </h1>
+
         {/* Order Summary */}
-        <div className="bg-[#f9f5f2] p-6 rounded-xl shadow mb-6">
-          <h2 className="text-lg font-bold mb-4">Order Summary</h2>
+        <div className="bg-[#fdf8f4] p-6 rounded-xl shadow-md mb-10">
+          <h2 className="text-lg font-semibold text-gray-800 mb-4">
+            Order Summary
+          </h2>
           {cartItems.map((item) => (
             <div
               key={item._id}
@@ -121,90 +101,72 @@ export default function CheckoutPage() {
                 {item.product?.name || item.name} × {item.quantity}
               </span>
               <span>
-                Rs.{" "}
-                {item.product?.price * item.quantity ||
-                  item.price * item.quantity}
+                Rs. {(item.product?.price || item.price) * item.quantity}
               </span>
             </div>
           ))}
-          <hr className="my-3" />
-          <div className="flex justify-between font-semibold text-base">
+          <hr className="my-4" />
+          <div className="flex justify-between text-lg font-bold text-gray-900">
             <span>Total</span>
             <span>Rs. {total}</span>
           </div>
         </div>
 
         {/* Shipping Address */}
-        <div className="mb-8">
-          <h2 className="text-lg font-semibold mb-4">Shipping Address</h2>
-          <input
-            type="text"
-            placeholder="Street Address"
-            className="w-full border rounded px-4 py-2 mb-3"
-            value={address.street}
-            onChange={(e) => setAddress({ ...address, street: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="City"
-            className="w-full border rounded px-4 py-2 mb-3"
-            value={address.city}
-            onChange={(e) => setAddress({ ...address, city: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Province / State"
-            className="w-full border rounded px-4 py-2 mb-3"
-            value={address.state}
-            onChange={(e) => setAddress({ ...address, state: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Postal Code"
-            className="w-full border rounded px-4 py-2 mb-3"
-            value={address.postalCode}
-            onChange={(e) =>
-              setAddress({ ...address, postalCode: e.target.value })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Phone Number"
-            className="w-full border rounded px-4 py-2"
-            value={address.phone}
-            onChange={(e) => setAddress({ ...address, phone: e.target.value })}
-          />
+        <div className="bg-white p-6 rounded-xl shadow-sm mb-10">
+          <h2 className="text-lg font-semibold text-gray-800 mb-4">
+            Shipping Address
+          </h2>
+          {["street", "city", "state", "postalCode", "phone"].map((field) => (
+            <input
+              key={field}
+              type="text"
+              placeholder={
+                field[0].toUpperCase() + field.slice(1).replace("Code", " Code")
+              }
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-3 text-sm"
+              value={address[field]}
+              onChange={(e) =>
+                setAddress({ ...address, [field]: e.target.value })
+              }
+            />
+          ))}
         </div>
 
-        {/* Contact & Gift Info */}
-        <div className="space-y-4 mb-8">
+        {/* Contact & Gift */}
+        <div className="bg-white p-6 rounded-xl shadow-sm mb-10">
+          <h2 className="text-lg font-semibold text-gray-800 mb-4">
+            Recipient Info
+          </h2>
           <input
             type="text"
             placeholder="Recipient's Name"
-            className="w-full border rounded px-4 py-2"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-3 text-sm"
             value={recipientName}
             onChange={(e) => setRecipientName(e.target.value)}
           />
           <input
             type="email"
             placeholder="Recipient's Email"
-            className="w-full border rounded px-4 py-2"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-3 text-sm"
             value={recipientEmail}
             onChange={(e) => setRecipientEmail(e.target.value)}
           />
           <textarea
             placeholder="Gift Message (optional)"
-            className="w-full border rounded px-4 py-2"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm"
             value={giftMessage}
             onChange={(e) => setGiftMessage(e.target.value)}
           />
         </div>
 
         {/* Payment Method */}
-        <div className="mb-6">
-          <label className="block font-medium mb-2">Payment Method</label>
+        <div className="bg-white p-6 rounded-xl shadow-sm mb-8">
+          <h2 className="text-lg font-semibold text-gray-800 mb-3">
+            Payment Method
+          </h2>
           <select
-            className="w-full border rounded px-4 py-2"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm"
             value={paymentMethod}
             onChange={(e) => setPaymentMethod(e.target.value)}
           >
@@ -214,18 +176,17 @@ export default function CheckoutPage() {
           </select>
         </div>
 
+        {/* Pay Button */}
         <button
           disabled={loading}
-          onClick={() => {
-            if (paymentMethod === "Khalti") {
-              handleKhaltiPayment();
-            } else {
-              handlePlaceOrder(); // Handle other payment methods
-            }
-          }}
-          className="bg-[#5c2d91] text-white font-semibold px-6 py-3 rounded-full w-full hover:opacity-90"
+          onClick={() =>
+            paymentMethod === "Khalti"
+              ? handleKhaltiPayment()
+              : handlePlaceOrder()
+          }
+          className="w-full bg-[#5c2d91] hover:bg-[#4b2380] transition text-white font-medium text-sm py-3 rounded-full shadow-md"
         >
-          {loading ? "Processing..." : "Pay with Khalti"}
+          {loading ? "Processing..." : `Pay with ${paymentMethod}`}
         </button>
       </div>
     </div>
