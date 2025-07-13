@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { createContext, useContext, useEffect, useState } from "react";
 import { getToken } from "../utils/auth";
 
 const CartContext = createContext();
@@ -9,7 +9,7 @@ export const CartProvider = ({ children }) => {
 
   const fetchCart = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/cart", {
+      const res = await axios.get("http://localhost:5001/api/cart", {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
       setCartItems(res.data.cart || []);
@@ -26,7 +26,9 @@ export const CartProvider = ({ children }) => {
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ cartItems, setCartItems, cartCount, fetchCart }}>
+    <CartContext.Provider
+      value={{ cartItems, setCartItems, cartCount, fetchCart }}
+    >
       {children}
     </CartContext.Provider>
   );

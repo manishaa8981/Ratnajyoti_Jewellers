@@ -13,9 +13,8 @@ export default function useBangleMesh(
     if (!video || !canvas) return;
 
     const ctx = canvas.getContext("2d");
-
     const img = new Image();
-    img.src = `http://localhost:5000/uploads/${imageFile}`;
+    img.src = `http://localhost:5001/uploads/${imageFile}`;
 
     const hands = new Hands({
       locateFile: (file) =>
@@ -40,28 +39,34 @@ export default function useBangleMesh(
           return;
 
         const hand = results.multiHandLandmarks[0];
+        const wrist = hand[0];
+        const indexBase = hand[5];
+        const pinkyBase = hand[17];
 
-        // Use wrist and base of palm for bangle placement
-        const wrist = hand[0]; // Wrist
-        const basePalm = hand[5]; // Base of index finger (can help with rotation later)
+        const x1 = indexBase.x * canvas.width;
+        const y1 = indexBase.y * canvas.height;
+        const x2 = pinkyBase.x * canvas.width;
+        const y2 = pinkyBase.y * canvas.height;
 
-        const x = wrist.x * canvas.width;
-        const y = wrist.y * canvas.height;
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const angle = Math.atan2(dy, dx);
 
-        // OPTIONAL: Offset to move it lower
-        const offsetY = 20;
+        // 📏 Adjust scaling here:
+        const rawWidth = Math.hypot(dx, dy);
+        const width = rawWidth * 1.2; // Try 1.2 - 1.6 (previously was 2.3)
+        const height = width / 3.8; // Make it slimmer as well (previously 3.5)
 
-        // Draw the bangle image centered on wrist
-        const width = 80;
-        const height = 30;
+        // 🎯 Centering
+        const centerX = (x1 + x2) / 2;
+        const centerY = wrist.y * canvas.height + 28;
 
-        ctx.drawImage(
-          img,
-          x - width / 2,
-          y + offsetY - height / 2,
-          width,
-          height
-        );
+        // 🎨 Draw with rotation
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(angle);
+        ctx.drawImage(img, -width / 2, -height / 2, width, height);
+        ctx.restore();
       });
     };
 

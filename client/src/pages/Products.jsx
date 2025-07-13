@@ -40,7 +40,7 @@ export default function Products() {
         params.subcategory = query.get("subcategory");
 
       try {
-        const res = await axios.get("http://localhost:5000/api/products", {
+        const res = await axios.get("http://localhost:5001/api/products", {
           params,
         });
         setProducts(res.data);
@@ -52,12 +52,18 @@ export default function Products() {
     fetchProducts();
   }, [query, category, subcategory, priceRange, sort]);
 
+  useEffect(() => {
+    // Sync URL query to local state filters
+    if (query.get("category")) setCategory(query.get("category"));
+    if (query.get("subcategory")) setSubcategory(query.get("subcategory"));
+  }, [query]);
+
   return (
     <div>
       <Navbar />
 
       {/* Breadcrumb */}
-      <div className="px-20 mt-4 mb-2 text-sm text-gray-600 font-medium">
+      <div className="px-20 mt-6 mb-2 text-sm text-gray-600 font-medium">
         Home
         {query.get("category") && ` > ${query.get("category")}`}
         {query.get("subcategory") && ` > ${query.get("subcategory")}`}
@@ -116,25 +122,25 @@ export default function Products() {
                 Price
               </h4>
               <div className="flex flex-wrap gap-2">
-                {[25000, 50000, 100000].map((price, idx) => (
+                {[25001, 50010, 100000].map((price, idx) => (
                   <button
                     key={price}
                     onClick={() =>
                       setPriceRange(
                         idx === 0
-                          ? { min: 0, max: 25000 }
+                          ? { min: 0, max: 25001 }
                           : idx === 1
-                          ? { min: 25000, max: 50000 }
-                          : { min: 50000, max: 1000000 }
+                          ? { min: 25001, max: 50010 }
+                          : { min: 50010, max: 1000000 }
                       )
                     }
                     className="border border-amber-600 text-amber-600 px-3 py-1 rounded-full text-sm hover:bg-amber-50 transition"
                   >
                     {idx === 0
-                      ? "Rs. 25000"
+                      ? "Rs. 25001"
                       : idx === 1
-                      ? "Rs. 25000 - 50000"
-                      : "Rs. 50000+"}
+                      ? "Rs. 25001 - 50010"
+                      : "Rs. 50010+"}
                   </button>
                 ))}
               </div>
@@ -142,15 +148,20 @@ export default function Products() {
 
             {/* Category Filter */}
             <div>
-              <h4 className="font-semibold text-sm text-gray-700 mb-2">
+              <h4 className="text-sm text-gray-700 mb-2 font-semibold">
                 Jewellery Type
               </h4>
+
               <div className="flex flex-wrap gap-2">
                 {["Gold", "Diamond", "Silver"].map((cat) => (
                   <button
                     key={cat}
                     onClick={() => setCategory(cat)}
-                    className="border border-gray-400 px-3 py-1 rounded-full text-sm hover:bg-gray-100 transition"
+                    className={`border px-3 py-1 rounded-full text-sm hover:bg-gray-100 transition ${
+                      category === cat
+                        ? "border-amber-600 text-amber-600 font-semibold"
+                        : "border-gray-400"
+                    }`}
                   >
                     {cat}
                   </button>
@@ -160,9 +171,10 @@ export default function Products() {
 
             {/* Subcategory Filter */}
             <div>
-              <h4 className="font-semibold text-sm text-gray-700 mb-2">
+              <h4 className="text-sm text-gray-700 mb-2 font-semibold">
                 Subcategory
               </h4>
+
               <div className="flex flex-wrap gap-2">
                 {["Ring", "Earring", "Necklace", "Pendant"].map((sub) => (
                   <button
@@ -196,13 +208,19 @@ export default function Products() {
 
         {/* Product Grid */}
         <div className="px-20 py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-20 z-10 relative">
-          {products.map((product) => (
-            <ProductCard
-              key={product._id}
-              product={product}
-              isLoggedIn={!!user}
-            />
-          ))}
+          {products.length === 0 ? (
+            <div className="col-span-full text-center text-gray-500 text-lg py-20">
+              No jewelry available.
+            </div>
+          ) : (
+            products.map((product) => (
+              <ProductCard
+                key={product._id}
+                product={product}
+                isLoggedIn={!!user}
+              />
+            ))
+          )}
         </div>
       </div>
     </div>

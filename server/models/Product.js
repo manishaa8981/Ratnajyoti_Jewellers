@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
   price: Number,
   category: String,
   subcategory: { type: String },
-  images: [String], // <-- Array of image filenames
+  images: [String], 
   inStock: Boolean,
   metal: String, // e.g. Gold
   karat: String, // e.g. 22k

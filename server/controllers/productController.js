@@ -2,37 +2,60 @@ const Product = require("../models/Product");
 
 // GET All Products with Filters
 exports.getAllProducts = async (req, res) => {
-  const { category, subcategory, sort, minPrice, maxPrice, search } = req.query;
-  let query = {};
+  try {
+    const category = req.query.category?.trim();
+    const subcategory = req.query.subcategory?.trim();
+    const sort = req.query.sort?.trim();
+    const search = req.query.search?.trim();
+    const minPrice = req.query.minPrice;
+    const maxPrice = req.query.maxPrice;
 
-  if (category) {
-    const categories = category.split(",");
-    query.category = { $in: categories };
+    let query = {};
+
+    // Category (case-insensitive exact match or $in support)
+    if (category) {
+      if (category.includes(",")) {
+        const categories = category.split(",").map((c) => c.trim());
+        query.category = { $in: categories };
+      } else {
+        query.category = new RegExp(`^${category}$`, "i");
+      }
+    }
+
+    // Subcategory (case-insensitive exact match)
+    if (subcategory) {
+      query.subcategory = new RegExp(`^${subcategory}$`, "i");
+    }
+
+    // Price filter
+    if (minPrice || maxPrice) {
+      query.price = {};
+      if (minPrice) query.price.$gte = parseInt(minPrice);
+      if (maxPrice) query.price.$lte = parseInt(maxPrice);
+    }
+
+    // Search (name or description)
+    if (search) {
+      const keyword = new RegExp(search, "i");
+      query.$or = [
+        { name: keyword },
+        { description: keyword },
+        { category: keyword },
+        { subcategory: keyword },
+      ];
+    }
+
+    // Sorting
+    let sortOption = {};
+    if (sort === "price_asc") sortOption.price = 1;
+    if (sort === "price_desc") sortOption.price = -1;
+
+    const products = await Product.find(query).sort(sortOption);
+    res.json(products);
+  } catch (err) {
+    console.error("Error in getAllProducts:", err);
+    res.status(500).json({ error: "Failed to fetch products" });
   }
-
-  if (subcategory) {
-    query.subcategory = subcategory;
-  }
-
-  if (minPrice || maxPrice) {
-    query.price = {};
-    if (minPrice) query.price.$gte = parseInt(minPrice);
-    if (maxPrice) query.price.$lte = parseInt(maxPrice);
-  }
-
-  if (search) {
-    query.$or = [
-      { name: { $regex: search, $options: "i" } },
-      { description: { $regex: search, $options: "i" } },
-    ];
-  }
-
-  let sortOption = {};
-  if (sort === "price_asc") sortOption.price = 1;
-  if (sort === "price_desc") sortOption.price = -1;
-
-  const products = await Product.find(query).sort(sortOption);
-  res.json(products);
 };
 
 // GET Product by ID
@@ -63,12 +86,12 @@ exports.createProduct = async (req, res) => {
     const tryOnOverlayFile = req.files?.tryOnOverlay?.[0]?.filename || null;
 
     const newProduct = new Product({
-      name,
-      description,
+      name: name?.trim(),
+      description: description?.trim(),
       weight,
       price,
-      category,
-      subcategory,
+      category: category?.trim(),
+      subcategory: subcategory?.trim(),
       images: imagePaths,
       inStock,
       tryOnType: tryOnType?.trim(),

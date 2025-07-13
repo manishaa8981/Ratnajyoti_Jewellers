@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ToastContainer } from "react-toastify";
+import "tw-elements";
 import App from "./App.jsx";
 import { CartProvider } from "./context/CartContext";
 import "./index.css";

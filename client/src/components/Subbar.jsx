@@ -6,50 +6,53 @@ const categories = [
     name: "All Jewelry",
     icon: "/icons/neck_icon1.png",
     subcategories: [
-      { name: "Bangles", icon: "/icons/bangle.png" },
-      { name: "Earrings", icon: "/icons/earing_icon.png" },
-      { name: "Chain", icon: "/icons/chain.png" },
+      { name: "All", icon: "/icons/bangle.jpg" },
+      // { name: "Earrings", icon: "/icons/earing.jpg" },
+      // { name: "Chain", icon: "/icons/chain.jpg" },
     ],
   },
   {
     name: "Gold",
     icon: "/icons/gold_icon.png",
     subcategories: [
-      { name: "Bracelet", icon: "/icons/bracelet.png" },
-      { name: "Pendants", icon: "/icons/pendant.png" },
-      { name: "Ring", icon: "/icons/ring.png" },
+      { name: "Bracelet", icon: "/icons/bracelet.jpg" },
+      { name: "Pendants", icon: "/icons/pendant.jpg" },
+      { name: "Ring", icon: "/icons/ring.jpeg" },
+      { name: "Bangles", icon: "/icons/bangle.jpg" },
+      { name: "Necklace", icon: "/images/necklace.jpg" },
     ],
   },
   {
     name: "Diamond",
     icon: "/icons/diamond_icon1.png",
     subcategories: [
-      { name: "Necklace", icon: "/icons/neck_icon.png" },
-      { name: "Studs", icon: "/icons/studs.png" },
+      { name: "Necklace", icon: "/icons/diamond-necklace.jpg" },
+      { name: "Studs", icon: "/icons/diamond-studs.jpg" },
+      { name: "Ring", icon: "/icons/diamond-ring.jpg" },
     ],
   },
   {
     name: "Earrings",
     icon: "/icons/earing_icon.png",
     subcategories: [
-      { name: "Hoops", icon: "/icons/hoops.png" },
-      { name: "Drops", icon: "/icons/drops.png" },
+      { name: "Hoops", icon: "/icons/hoop.png" },
+      { name: "Drops", icon: "/icons/drops.jpeg" },
     ],
   },
   {
     name: "Rings",
     icon: "/icons/ring_icon.png",
     subcategories: [
-      { name: "Engagement", icon: "/icons/engagement.png" },
-      { name: "Cocktail", icon: "/icons/cocktail.png" },
+      { name: "Engagement", icon: "/icons/engagement.jpg" },
+      { name: "Casual", icon: "/icons/casual.jpeg" },
     ],
   },
   {
     name: "Wedding",
     icon: "/icons/wedding_icon.png",
     subcategories: [
-      { name: "Nose Ring", icon: "/icons/nose_ring.png" },
-      { name: "Mangalsutra", icon: "/icons/mangalsutra.png" },
+      { name: "Nose Ring", icon: "/icons/nose_ring.jpg" },
+      { name: "Mangalsutra", icon: "/icons/mangalsutra.jpg" },
     ],
   },
 ];
@@ -60,112 +63,65 @@ export default function Subbar() {
 
   const handleNavigate = (category, subcategory) => {
     const query = new URLSearchParams();
-    if (category) query.append("category", category);
-    if (subcategory) query.append("subcategory", subcategory);
+
+    if (category !== "All Jewelry") {
+      if (category) query.append("category", category);
+      if (subcategory) query.append("subcategory", subcategory);
+    }
+
     navigate(`/products?${query.toString()}`);
   };
 
   return (
     <div>
-      <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-evenly gap-8">
-        {categories.map((cat, index) => (
-          <div
-            key={cat.name}
-            onMouseEnter={() => setHovered(index)}
-            onMouseLeave={() => setHovered(null)}
-            className="relative z-50"
-          >
-            <div className="flex items-center gap-2 cursor-pointer hover:text-amber-700 transition">
-              <img src={cat.icon} alt={cat.name} className="w-7 h-7" />
-              <span>{cat.name}</span>
-            </div>
-
-            {/* Subcategory dropdown */}
-            {hovered === index && (
-              <div className="absolute top-full left-0 w-screen bg-white border-t shadow-lg z-40">
-                <div className="max-w-7xl mx-auto px-12 py-6 grid grid-cols-4 gap-8">
-                  {cat.subcategories.map((sub) => (
-                    <button
-                      key={sub.name}
-                      onClick={() => handleNavigate(cat.name, sub.name)}
-                      className="flex flex-col items-center gap-2 hover:text-amber-700 transition"
-                    >
-                      <img
-                        src={sub.icon}
-                        alt={sub.name}
-                        className="w-10 h-10 object-contain"
-                      />
-                      <span className="text-sm font-medium">{sub.name}</span>
-                    </button>
-                  ))}
-                </div>
+      <div
+        className="bg-white   relative z-10"
+        onMouseLeave={() => setHovered(null)} // Apply here
+      >
+        {/* Top Category Bar */}
+        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-evenly gap-8 relative">
+          {categories.map((cat, index) => (
+            <div
+              key={cat.name}
+              onMouseEnter={() => setHovered(index)}
+              className={`relative z-50 ${
+                hovered === index ? "text-amber-700" : ""
+              }`}
+            >
+              <div className="flex items-center gap-2 cursor-pointer hover:text-amber-700 transition">
+                <img src={cat.icon} alt={cat.name} className="w-7 h-7" />
+                <span>{cat.name}</span>
               </div>
-            )}
+            </div>
+          ))}
+        </div>
+
+        {/* Fixed Dropdown */}
+        {hovered !== null && (
+          <div className="w-full bg-white border-t shadow-lg z-40">
+            <div className="max-w-7xl mx-auto px-12 py-6 grid grid-cols-4 gap-8">
+              {categories[hovered].subcategories.map((sub) => (
+                <button
+                  key={sub.name}
+                  onClick={() =>
+                    handleNavigate(categories[hovered].name, sub.name)
+                  }
+                  className="flex flex-col items-center gap-2 hover:text-amber-700 transition"
+                >
+                  <img
+                    src={sub.icon}
+                    alt={sub.name}
+                    className="w-12 h-12 object-cover rounded-full border border-gray-300"
+                    onError={(e) => (e.target.style.display = "none")}
+                  />
+
+                  <span className="text-sm font-medium">{sub.name}</span>
+                </button>
+              ))}
+            </div>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );
 }
-
-//   return (
-//     <div className="border-t">
-//       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-evenly gap-8">
-//         {categories.map((cat, index) => (
-//           <div
-//             key={cat.name}
-//             className="relative"
-//             onMouseEnter={() => setHovered(index)}
-//             onMouseLeave={() => setHovered(null)}
-//           >
-//             <div className="flex items-center gap-1 cursor-pointer hover:text-gold-700 transition">
-//               <div className="w-7 h-7 flex items-center justify-center">
-//                 {typeof cat.icon === "string" ? (
-//                   <img
-//                     src={cat.icon}
-//                     alt={cat.name}
-//                     className="w-full h-full object-contain"
-//                   />
-//                 ) : (
-//                   <span className="text-lg">{cat.icon}</span>
-//                 )}
-//               </div>
-//               <span>{cat.name}</span>
-//             </div>
-
-//             {hovered === index && (
-//               <div className="fixed left-0 top-[8rem] w-full z-40 bg-white shadow-xl border-t border-gray-200">
-//                 <div className="max-w-7xl mx-auto px-12 py-6 grid grid-cols-4 gap-8">
-//                   {cat.subcategories.map((sub) => (
-//                     <button
-//                       key={sub.name}
-//                       className="flex flex-col items-center gap-2 hover:text-amber-700 transition"
-//                       onClick={() =>
-//                         navigate(
-//                           `/products?subcategory=${encodeURIComponent(
-//                             sub.name
-//                           )}`
-//                         )
-//                       }
-//                     >
-//                       {typeof sub.icon === "string" ? (
-//                         <img
-//                           src={sub.icon}
-//                           alt={sub.name}
-//                           className="w-10 h-10 object-contain"
-//                         />
-//                       ) : (
-//                         <span className="text-2xl">{sub.icon}</span>
-//                       )}
-//                       <span className="text-sm font-medium">{sub.name}</span>
-//                     </button>
-//                   ))}
-//                 </div>
-//               </div>
-//             )}
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }

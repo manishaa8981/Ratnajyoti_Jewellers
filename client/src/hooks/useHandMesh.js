@@ -15,7 +15,7 @@ export default function useHandMesh(
     const ctx = canvas.getContext("2d");
 
     const img = new Image();
-    img.src = `http://localhost:5000/uploads/${imageFile}`;
+    img.src = `http://localhost:5001/uploads/${imageFile}`;
 
     const hands = new Hands({
       locateFile: (file) =>
@@ -43,11 +43,11 @@ export default function useHandMesh(
         ) {
           const landmarks = results.multiHandLandmarks[0];
 
-          const ringBase = landmarks[14]; // Use base of ring finger
+          const ringBase = landmarks[14];
           const x = ringBase.x * canvas.width;
           const y = ringBase.y * canvas.height;
 
-          ctx.drawImage(img, x - 15, y - 15, 40, 40); // Adjust size and offset
+          ctx.drawImage(img, x - 15, y - 40, 80, 80);
         }
       });
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
 import TryOnPreview from "../components/TryOnPreview";
 import { getToken, isLoggedIn } from "../utils/auth";
@@ -23,7 +24,7 @@ export default function ProductDetail() {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/cart/add",
+        "http://localhost:5001/api/cart/add",
         {
           productId: product._id,
           quantity: 1,
@@ -35,32 +36,32 @@ export default function ProductDetail() {
         }
       );
 
-      alert("Added to cart 🛒");
+      toast.success("Added to cart 🛒");
     } catch {
-      alert("Error adding to cart");
+      toast.error("Error adding to cart");
     }
   };
 
   const addToWishlist = async () => {
     if (!isLoggedIn()) {
-      alert("Login required to add to wishlist.");
+      toast.error("Login required to add to wishlist.");
       return;
     }
 
     try {
       await axios.post(
-        "http://localhost:5000/api/wishlist/add",
+        "http://localhost:5001/api/wishlist/add",
         { productId: product._id },
         { headers: { Authorization: `Bearer ${getToken()}` } }
       );
-      alert("Added to wishlist 💖");
+      toast.success("Added to wishlist 💖");
     } catch {
-      alert("Already in wishlist or error");
+      toast.error("Already in wishlist or error");
     }
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/products/${id}`).then((res) => {
+    axios.get(`http://localhost:5001/api/products/${id}`).then((res) => {
       setProduct(res.data);
     });
   }, [id]);
@@ -68,7 +69,7 @@ export default function ProductDetail() {
   useEffect(() => {
     const fetchSubcategories = async () => {
       const res = await axios.get(
-        "http://localhost:5000/api/products/subcategories"
+        "http://localhost:5001/api/products/subcategories"
       );
       const ringSubs = res.data.filter((sub) =>
         sub.toLowerCase().includes("ring")
@@ -144,7 +145,7 @@ export default function ProductDetail() {
           {/* Left: Image Viewer */}
           <div>
             <img
-              src={`http://localhost:5000/uploads/${product.images?.[activeImageIndex]}`}
+              src={`http://localhost:5001/uploads/${product.images?.[activeImageIndex]}`}
               alt={product.name}
               className="w-full h-[400px] object-cover rounded-xl"
             />
@@ -152,7 +153,7 @@ export default function ProductDetail() {
               {product.images?.map((img, idx) => (
                 <img
                   key={idx}
-                  src={`http://localhost:5000/uploads/${img}`}
+                  src={`http://localhost:5001/uploads/${img}`}
                   onClick={() => setActiveImageIndex(idx)}
                   className={`w-24 h-24 object-cover border rounded cursor-pointer ${
                     idx === activeImageIndex

@@ -62,7 +62,7 @@ export default function WishlistPage() {
                   >
                     <td className="flex items-center gap-4 px-6 py-5">
                       <img
-                        src={`http://localhost:5000/uploads/${item.image}`}
+                        src={`http://localhost:5001/uploads/${item.image}`}
                         alt={item.name}
                         className="w-20 h-20 rounded-md object-cover border"
                       />

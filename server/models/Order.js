@@ -8,7 +8,12 @@ const orderSchema = new mongoose.Schema({
       quantity: Number,
     },
   ],
-  totalPrice: Number,
+  totalPrice: {
+    type: Number,
+    required: true,
+    enum: ["PENDING", "COMPLETE", "FAILED", "REFUNDED"], 
+    default: "PENDING",
+  },
   createdAt: { type: Date, default: Date.now },
   paymentStatus: { type: String, default: "Pending" }, // or "Paid"
   paymentMethod: String, // e.g., "Khalti", "Stripe",

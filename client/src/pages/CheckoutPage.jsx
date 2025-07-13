@@ -25,14 +25,33 @@ export default function CheckoutPage() {
   });
   const handleKhaltiPayment = () => {
     const config = {
-      publicKey: "test_public_key_dc74c3bf8a9c4f6e87fc81243d1db27a", // 🔁 replace with your key
+      publicKey: import.meta.env.VITE_KHALTI_PUBLIC_KEY,
       productIdentity: "ratnajyoti123",
       productName: "Jewelry Order",
       productUrl: "http://localhost:4001/cart",
       eventHandler: {
         onSuccess: async (payload) => {
           console.log("✅ Khalti Payment Success", payload);
-          await handlePlaceOrder(payload);
+
+          try {
+            const verifyRes = await axios.post(
+              "http://localhost:5001/api/khalti/verify",
+              {
+                token: payload.token,
+                amount: payload.amount,
+              }
+            );
+
+            if (verifyRes.data.success) {
+              console.log("✅ Khalti Payment Verified");
+              await handlePlaceOrder(payload);
+            } else {
+              alert("❌ Payment verification failed.");
+            }
+          } catch (err) {
+            alert("⚠️ Error verifying Khalti payment.");
+            console.error(err);
+          }
         },
         onError: (error) => {
           console.error("❌ Khalti Error:", error);
@@ -69,7 +88,7 @@ export default function CheckoutPage() {
       };
 
       const res = await axios.post(
-        "http://localhost:5000/api/orders",
+        "http://localhost:5001/api/orders",
         orderPayload,
         {
           headers: { Authorization: `Bearer ${getToken()}` },
@@ -90,6 +109,31 @@ export default function CheckoutPage() {
       <Navbar />
       <div className="max-w-4xl mx-auto p-6">
         <h1 className="text-2xl font-semibold mb-6">Checkout</h1>
+        {/* Order Summary */}
+        <div className="bg-[#f9f5f2] p-6 rounded-xl shadow mb-6">
+          <h2 className="text-lg font-bold mb-4">Order Summary</h2>
+          {cartItems.map((item) => (
+            <div
+              key={item._id}
+              className="flex justify-between text-sm text-gray-700 mb-2"
+            >
+              <span>
+                {item.product?.name || item.name} × {item.quantity}
+              </span>
+              <span>
+                Rs.{" "}
+                {item.product?.price * item.quantity ||
+                  item.price * item.quantity}
+              </span>
+            </div>
+          ))}
+          <hr className="my-3" />
+          <div className="flex justify-between font-semibold text-base">
+            <span>Total</span>
+            <span>Rs. {total}</span>
+          </div>
+        </div>
+
         {/* Shipping Address */}
         <div className="mb-8">
           <h2 className="text-lg font-semibold mb-4">Shipping Address</h2>
@@ -170,34 +214,15 @@ export default function CheckoutPage() {
           </select>
         </div>
 
-        {/* Order Summary */}
-        <div className="bg-[#f9f5f2] p-6 rounded-xl shadow mb-6">
-          <h2 className="text-lg font-bold mb-4">Order Summary</h2>
-          {cartItems.map((item) => (
-            <div
-              key={item._id}
-              className="flex justify-between text-sm text-gray-700 mb-2"
-            >
-              <span>
-                {item.product?.name || item.name} × {item.quantity}
-              </span>
-              <span>
-                Rs.{" "}
-                {item.product?.price * item.quantity ||
-                  item.price * item.quantity}
-              </span>
-            </div>
-          ))}
-          <hr className="my-3" />
-          <div className="flex justify-between font-semibold text-base">
-            <span>Total</span>
-            <span>Rs. {total}</span>
-          </div>
-        </div>
-
         <button
           disabled={loading}
-          onClick={handleKhaltiPayment}
+          onClick={() => {
+            if (paymentMethod === "Khalti") {
+              handleKhaltiPayment();
+            } else {
+              handlePlaceOrder(); // Handle other payment methods
+            }
+          }}
           className="bg-[#5c2d91] text-white font-semibold px-6 py-3 rounded-full w-full hover:opacity-90"
         >
           {loading ? "Processing..." : "Pay with Khalti"}

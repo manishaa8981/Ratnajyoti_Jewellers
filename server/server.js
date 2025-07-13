@@ -8,6 +8,7 @@ const userRoutes = require("./routes/userRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const wishlistRoutes = require("./routes/wishlistRoutes");
+const khaltiRoutes = require("./routes/khalti");
 
 dotenv.config();
 
@@ -22,7 +23,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 app.use("/uploads", express.static(__dirname + "/uploads"));
-
+app.use("/api/khalti", khaltiRoutes);
 
 // MongoDB connect
 mongoose
@@ -30,5 +31,5 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error(err));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
