@@ -20,7 +20,7 @@ export default function Carousel() {
         "Discover our handcrafted gold jewelry collection featuring traditional and contemporary designs",
       image:
         "https://i.pinimg.com/736x/80/cb/be/80cbbe9eaf8c9f178ce1f7f035fd7f5e.jpg",
-      price: "Starting from ₹25,000",
+      price: "Starting from Rs.25,000",
       category: "Gold",
       bg: "from-yellow-50 to-amber-100",
     },
@@ -32,7 +32,7 @@ export default function Carousel() {
         "Stunning diamond jewelry that captures light and hearts with unmatched brilliance",
       image:
         "https://i.pinimg.com/1200x/6c/49/4c/6c494c4555bb7a5e637a965a8601274f.jpg",
-      price: "Starting from ₹50,000",
+      price: "Starting from Rs.50,000",
       category: "Diamond",
       bg: "from-blue-50 to-indigo-100",
     },
@@ -44,7 +44,7 @@ export default function Carousel() {
         "Complete bridal jewelry sets designed to make your special day unforgettable",
       image:
         "https://i.pinimg.com/736x/13/07/02/1307024610ad3ffb9f24c6a1b876c377.jpg",
-      price: "Starting from ₹75,000",
+      price: "Starting from Rs.75,000",
       category: "Bridal",
       bg: "from-red-50 to-pink-100",
     },
@@ -56,8 +56,8 @@ export default function Carousel() {
         "Traditional earring designs that celebrate our rich cultural heritage",
       image:
         "https://i.pinimg.com/1200x/89/cb/e3/89cbe3c1cc038a23bdc49d9d157d1389.jpg",
-      price: "Starting from ₹15,000",
-      category: "Earrings",
+      price: "Starting from Rs.15,000",
+      // category: "Earrings",
       bg: "from-purple-50 to-violet-100",
     },
   ];
@@ -113,18 +113,18 @@ export default function Carousel() {
             {/* Left Content */}
             <div className="space-y-6 text-center lg:text-left">
               <div className="space-y-2">
-                <div className="inline-block px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full text-sm font-medium text-gray-700 shadow-sm">
+                {/* <div className="inline-block px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full text-sm font-medium text-gray-700 shadow-sm">
                   {currentSlideData.category}
-                </div>
+                </div> */}
                 <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 leading-tight">
                   {currentSlideData.title}
                 </h1>
-                <h2 className="text-2xl lg:text-3xl text-amber-700 font-light">
+                <h2 className="text-2xl lg:text-3xl text-white font-light">
                   {currentSlideData.subtitle}
                 </h2>
               </div>
 
-              <p className="text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
+              <p className="text-lg text-white leading-relaxed max-w-lg mx-auto lg:mx-0">
                 {currentSlideData.description}
               </p>
 
@@ -142,7 +142,7 @@ export default function Carousel() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <button className="px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
+                <button className="px-8 py-4 bg-bronze hover:bg-bronze-10 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
                   <ShoppingCart className="w-5 h-5" />
                   Shop Now
                 </button>
@@ -172,9 +172,9 @@ export default function Carousel() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
 
                   {/* Price tag */}
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-2 rounded-full text-sm font-semibold text-gray-800 shadow-lg">
+                  {/* <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-2 rounded-full text-sm font-semibold text-gray-800 shadow-lg">
                     Premium Quality
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
