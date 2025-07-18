@@ -31,23 +31,21 @@ export default function useHandMesh(
 
     img.onload = () => {
       hands.onResults((results) => {
-        // Set canvas size to match video
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        if (
-          results.multiHandLandmarks &&
-          results.multiHandLandmarks.length > 0
-        ) {
+        if (results.multiHandLandmarks?.length) {
           const landmarks = results.multiHandLandmarks[0];
 
-          const ringBase = landmarks[14];
-          const x = ringBase.x * canvas.width;
-          const y = ringBase.y * canvas.height;
+          const base = landmarks[13]; // ring finger base
+          const tip = landmarks[14];
 
-          ctx.drawImage(img, x - 15, y - 40, 80, 80);
+          const x = ((base.x + tip.x) / 2) * canvas.width;
+          const y = ((base.y + tip.y) / 2) * canvas.height;
+
+          ctx.drawImage(img, x - 25, y - 25, 50, 50);
         }
       });
 
