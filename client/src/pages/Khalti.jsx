@@ -15,16 +15,16 @@ export default function KhaltiSuccess() {
         });
 
         if (res.data.status === "Completed") {
-          alert("✅ Payment Successful!");
+          toast.success("✅ Payment Successful!");
           // You can create order in backend now using res.data info
           navigate("/order-confirmation");
         } else {
-          alert("⚠️ Payment not completed.");
+          toast.error("⚠️ Payment not completed.");
           navigate("/checkout");
         }
       } catch (err) {
         console.error("❌ Payment verify error", err);
-        alert("Error verifying payment.");
+        toast.error("Error verifying payment.");
         navigate("/checkout");
       }
     };
