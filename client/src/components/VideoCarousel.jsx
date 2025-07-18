@@ -22,7 +22,7 @@ export default function Carousel() {
         "https://i.pinimg.com/736x/80/cb/be/80cbbe9eaf8c9f178ce1f7f035fd7f5e.jpg",
       price: "Starting from Rs.25,000",
       category: "Gold",
-      bg: "from-yellow-50 to-amber-100",
+      textColor: "text-yellow-100",
     },
     {
       id: 2,
@@ -34,7 +34,7 @@ export default function Carousel() {
         "https://i.pinimg.com/1200x/6c/49/4c/6c494c4555bb7a5e637a965a8601274f.jpg",
       price: "Starting from Rs.50,000",
       category: "Diamond",
-      bg: "from-blue-50 to-indigo-100",
+      textColor: "text-white",
     },
     {
       id: 3,
@@ -46,7 +46,7 @@ export default function Carousel() {
         "https://i.pinimg.com/736x/13/07/02/1307024610ad3ffb9f24c6a1b876c377.jpg",
       price: "Starting from Rs.75,000",
       category: "Bridal",
-      bg: "from-red-50 to-pink-100",
+      textColor: "text-red-100",
     },
     {
       id: 4,
@@ -58,7 +58,7 @@ export default function Carousel() {
         "https://i.pinimg.com/1200x/89/cb/e3/89cbe3c1cc038a23bdc49d9d157d1389.jpg",
       price: "Starting from Rs.15,000",
       // category: "Earrings",
-      bg: "from-purple-50 to-violet-100",
+      textColor: "text-yellow-900",
     },
   ];
 
@@ -116,7 +116,10 @@ export default function Carousel() {
                 {/* <div className="inline-block px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full text-sm font-medium text-gray-700 shadow-sm">
                   {currentSlideData.category}
                 </div> */}
-                <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 leading-tight">
+                <h1
+                  className={`text-5xl lg:text-6xl font-bold leading-tight ${currentSlideData.textColor}`}
+                >
+                  {" "}
                   {currentSlideData.title}
                 </h1>
                 <h2 className="text-2xl lg:text-3xl text-white font-light">
