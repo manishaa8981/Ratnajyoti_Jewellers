@@ -18,7 +18,7 @@ export default function ProductDetail() {
 
   const addToCart = async () => {
     if (!isLoggedIn()) {
-      alert("Login required to add to cart.");
+      toast("Login required to add to cart.");
       return;
     }
 
