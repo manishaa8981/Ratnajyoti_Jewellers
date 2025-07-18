@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { AiOutlineClose } from "react-icons/ai"; // for cross icon
+import { IoCloseCircleSharp } from "react-icons/io5"; // for cross icon
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -96,8 +96,20 @@ export default function Cart() {
               {cart.map((item) => (
                 <div
                   key={item._id}
-                  className="bg-[#f9f5f2] rounded-xl shadow p-4 flex items-center justify-between"
+                  className="bg-[#f9f5f2] relative rounded-xl shadow p-4 flex items-center justify-between"
                 >
+                  {/* Close button at top right */}
+                  <button
+                    onClick={() => {
+                      setItemToRemove(item);
+                      setShowConfirm(true);
+                    }}
+                    className="absolute top-2 right-2 text-gray-400 hover:text-red-500"
+                    title="Remove"
+                  >
+                    <IoCloseCircleSharp className="text-lg " />
+                  </button>
+
                   <div className="flex items-center gap-4">
                     <img
                       src={`http://localhost:5001/uploads/${
@@ -116,6 +128,7 @@ export default function Cart() {
                       </p>
                     </div>
                   </div>
+
                   <div className="text-right space-y-2">
                     <div className="flex justify-end gap-2 items-center text-sm">
                       <button
@@ -132,20 +145,11 @@ export default function Cart() {
                         +
                       </button>
                     </div>
-                    <button
-                      onClick={() => {
-                        setItemToRemove(item);
-                        setShowConfirm(true);
-                      }}
-                      className="text-sm text-gray-400 hover:text-red-500"
-                      title="Remove"
-                    >
-                      <AiOutlineClose className="text-lg" />
-                    </button>
                   </div>
                 </div>
               ))}
             </div>
+
             {showConfirm && itemToRemove && (
               <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
                 <div className="bg-white rounded-xl p-6 w-[500px] max-w-md shadow-xl relative">
@@ -154,7 +158,7 @@ export default function Cart() {
                     className="absolute top-2 right-2 text-gray-500 hover:text-red-500"
                     onClick={() => setShowConfirm(false)}
                   >
-                    <AiOutlineClose />
+                    <IoCloseCircleSharp />
                   </button>
 
                   {/* Product Details */}

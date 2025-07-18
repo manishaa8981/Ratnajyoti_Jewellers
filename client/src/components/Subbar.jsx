@@ -51,7 +51,7 @@ const categories = [
     name: "Wedding",
     icon: "/icons/wedding_icon.png",
     subcategories: [
-      { name: "Nose Ring", icon: "/icons/nose_ring.jpg" },
+      { name: "Nose Pin", icon: "/icons/nose_ring.jpg" },
       { name: "Mangalsutra", icon: "/icons/mangalsutra.jpg" },
     ],
   },
