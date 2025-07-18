@@ -1,15 +1,21 @@
+import { Player } from "@lottiefiles/react-lottie-player";
 import axios from "axios";
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Confetti from "react-confetti";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useWindowSize } from "react-use"; // for confetti
+import celebrationLottie from "../../public/lottie/Confetti.json"; // <-- you must add this Lottie file
 import Navbar from "../components/Navbar";
 import { getToken } from "../utils/auth";
+import jsPDF from "jspdf";
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const cartItems = location.state?.cartItems || [];
-  const total = location.state?.total || 0;
-
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const { width, height } = useWindowSize(); // for confetti
+  const [cartItems, setCartItems] = useState([]);
+  const [total, setTotal] = useState(0);
   const [recipientName, setRecipientName] = useState("");
   const [recipientEmail, setRecipientEmail] = useState("");
   const [giftMessage, setGiftMessage] = useState("");
@@ -39,10 +45,14 @@ export default function CheckoutPage() {
         }
       );
 
-      window.location.href = res.data.payment_url;
+      // ✅ Add return URL with identifier
+      const redirectUrl = new URL(res.data.payment_url);
+      redirectUrl.searchParams.set("from", "checkout");
+
+      window.location.href = redirectUrl.toString();
     } catch (err) {
       console.error("❌ Khalti Init Error", err);
-      alert("Khalti initiation failed.");
+      toast.error("Khalti initiation failed.");
     } finally {
       setLoading(false);
     }
@@ -53,7 +63,7 @@ export default function CheckoutPage() {
     try {
       const orderPayload = {
         items: cartItems.map((item) => ({
-          productId: item.product?._id || item._id,
+          productId: item.product?._id,
           quantity: item.quantity,
         })),
         totalPrice: total,
@@ -69,19 +79,131 @@ export default function CheckoutPage() {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
 
-      alert("🎉 Order Placed Successfully!");
-      navigate("/thank-you");
+      // ✅ Clear cart after order
+      await axios.delete("http://localhost:5001/api/cart/clear", {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      });
+
+      if (paymentMethod === "Cash on Delivery") {
+        setShowConfirmation(true);
+        setCartItems([]);
+          generateInvoice();
+      } else {
+        toast.success("🎉 Order Placed Successfully!");
+        navigate("/thank-you");
+      }
     } catch (err) {
       console.error("Order Error:", err);
-      alert("Failed to place order.");
+      toast.error("Failed to place order.");
     } finally {
       setLoading(false);
     }
   };
+  const generateInvoice = () => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("Ratnajyoti Jewellers - Invoice", 20, 20);
+
+    doc.setFontSize(12);
+    doc.text(`Invoice ID: #INV${Date.now()}`, 20, 30);
+    doc.text(`Name: ${recipientName || "Customer"}`, 20, 40);
+    doc.text(`Email: ${recipientEmail || "N/A"}`, 20, 50);
+    doc.text(`Payment Method: ${paymentMethod}`, 20, 60);
+
+    doc.text("Order Summary:", 20, 75);
+    let y = 85;
+    cartItems.forEach((item) => {
+      const name = item.product?.name || "Item";
+      const price = item.product?.price || 0;
+      const quantity = item.quantity;
+      const subtotal = price * quantity;
+
+      doc.text(`${name} × ${quantity} - Rs. ${subtotal}`, 20, y);
+      y += 10;
+    });
+
+    doc.text(`Total: Rs. ${total}`, 20, y + 10);
+
+    doc.save("invoice.pdf");
+  };
+
+  useEffect(() => {
+    async function fetchCart() {
+      try {
+        const res = await axios.get("http://localhost:5001/api/cart", {
+          headers: { Authorization: `Bearer ${getToken()}` },
+        });
+
+        const fetchedItems = res.data.cart || [];
+        setCartItems(fetchedItems);
+
+        // Calculate total
+        const calculatedTotal = fetchedItems.reduce((acc, item) => {
+          const price = item.product?.price || 0;
+          return acc + price * item.quantity;
+        }, 0);
+
+        setTotal(calculatedTotal);
+      } catch (err) {
+        console.error("❌ Error fetching cart:", err);
+        toast.error("Failed to load cart");
+      }
+    }
+
+    fetchCart();
+  }, []);
 
   return (
     <div>
       <Navbar />
+      {showConfirmation && (
+        <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center p-6">
+          <Confetti width={width} height={height} />
+          <Player
+            autoplay
+            loop={false}
+            src={celebrationLottie}
+            style={{ height: "200px", width: "200px" }}
+            onEvent={(event) => {
+              if (event === "complete") {
+                navigate("/"); // ✅ redirect to homepage after animation ends
+              }
+            }}
+          />
+
+          <h1 className="text-3xl font-bold text-green-600 mt-4">
+            Order Confirmed!
+          </h1>
+          <p className="text-gray-700 mt-2 mb-6">
+            Thank you for your purchase. We've received your order.
+          </p>
+
+          {/* Invoice Summary */}
+          <div className="w-full max-w-md bg-gray-50 border p-4 rounded-xl shadow-sm">
+            <h2 className="text-lg font-semibold mb-3">Invoice</h2>
+            <ul className="text-sm text-gray-800 mb-3">
+              {cartItems.map((item) => (
+                <div
+                  key={item._id}
+                  className="flex justify-between text-sm text-gray-700 mb-2"
+                >
+                  <span>
+                    {item.product?.name} × {item.quantity}
+                  </span>
+                  <span>Rs. {item.product?.price * item.quantity}</span>
+                </div>
+              ))}
+            </ul>
+            <hr className="my-2" />
+            <div className="flex justify-between font-bold">
+              <span>Total</span>
+              <span>Rs. {total}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-4xl mx-auto p-6 mt-10 mb-20">
         <h1 className="text-3xl font-semibold text-center mb-10 text-gray-800">
           Checkout
@@ -98,13 +220,12 @@ export default function CheckoutPage() {
               className="flex justify-between text-sm text-gray-700 mb-2"
             >
               <span>
-                {item.product?.name || item.name} × {item.quantity}
+                {item.product?.name} × {item.quantity}
               </span>
-              <span>
-                Rs. {(item.product?.price || item.price) * item.quantity}
-              </span>
+              <span>Rs. {item.product?.price * item.quantity}</span>
             </div>
           ))}
+
           <hr className="my-4" />
           <div className="flex justify-between text-lg font-bold text-gray-900">
             <span>Total</span>
