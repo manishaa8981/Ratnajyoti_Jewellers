@@ -31,13 +31,17 @@ exports.addToCart = async (req, res) => {
   if (!cart) {
     cart = new Cart({ userId: req.user.id, items: [{ productId, quantity }] });
   } else {
-    const itemIndex = cart.items.findIndex(
-      (item) => item.productId.toString() === productId
+    const itemIndex = cart.items.findIndex((item) =>
+      item.productId.equals(productId)
     );
+
     if (itemIndex > -1) {
       cart.items[itemIndex].quantity += quantity;
     } else {
       cart.items.push({ productId, quantity });
+    }
+    if (!productId || quantity <= 0) {
+      return res.status(400).json({ error: "Invalid product or quantity" });
     }
   }
 
@@ -49,9 +53,7 @@ exports.updateCartItem = async (req, res) => {
   const { productId, quantity } = req.body;
   const cart = await Cart.findOne({ userId: req.user.id });
 
-  const item = cart.items.find(
-    (item) => item.productId.toString() === productId
-  );
+  const item = cart.items.find((item) => item.productId.equals(productId));
   if (item) {
     item.quantity = quantity;
     await cart.save();
@@ -70,17 +72,7 @@ exports.removeFromCart = async (req, res) => {
   res.status(200).json(cart);
 };
 
-// DELETE /api/cart/clear
 exports.clearCart = async (req, res) => {
-  try {
-    await Cart.deleteMany({ userId: req.user.id }); // Adjust based on your schema
-    res.json({ success: true });
-  } catch (err) {
-    res.status(500).json({ error: "Failed to clear cart" });
-  }
+  await Cart.findOneAndUpdate({ userId: req.user.id }, { items: [] });
+  res.status(200).json({ message: "Cart cleared" });
 };
-
-// exports.clearCart = async (req, res) => {
-//   await Cart.findOneAndUpdate({ userId: req.user.id }, { items: [] });
-//   res.status(200).json({ message: "Cart cleared" });
-// };
