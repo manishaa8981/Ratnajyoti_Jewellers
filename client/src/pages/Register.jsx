@@ -3,6 +3,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { toast } from "react-toastify";
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ export default function SignupPage() {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
@@ -37,10 +38,10 @@ export default function SignupPage() {
         password: formData.password,
       });
 
-      alert("Registered successfully. Please log in.");
+      toast.success("Registered successfully. Please log in.");
       navigate("/login");
     } catch (err) {
-      alert("Registration failed. Email may already exist.");
+      toast.error("Registration failed. Email may already exist.");
     }
   };
 
