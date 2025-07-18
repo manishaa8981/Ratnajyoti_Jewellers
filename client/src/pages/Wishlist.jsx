@@ -18,11 +18,28 @@ export default function WishlistPage() {
     localStorage.setItem("wishlist", JSON.stringify(updated));
   };
 
-  // Add to cart
-  const addToCart = (item) => {
-    if (item.inStock) {
-      console.log(`Added ${item.name} to cart`);
-      // Your cart logic here
+  const addToCart = async (item) => {
+    if (!getToken()) {
+      toast("Login required to add to cart.");
+      return;
+    }
+
+    try {
+      await axios.post(
+        "http://localhost:5001/api/cart/add",
+        {
+          productId: item._id,
+          quantity: 1,
+        },
+        {
+          headers: { Authorization: `Bearer ${getToken()}` },
+        }
+      );
+
+      toast.success("Added to cart 🛒");
+    } catch (error) {
+      console.error("Error adding to cart", error);
+      toast.error("Failed to add to cart");
     }
   };
 
