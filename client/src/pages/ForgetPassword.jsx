@@ -16,9 +16,9 @@ export default function ForgotPasswordPage() {
           email,
         }
       );
-      alert("Reset link sent to your email.");
+      toast("Reset link sent to your email.");
     } catch (err) {
-      alert("Something went wrong. Try again.");
+      toast.error("Something went wrong. Try again.");
     }
   };
 
