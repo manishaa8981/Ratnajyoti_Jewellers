@@ -11,15 +11,17 @@ const orderSchema = new mongoose.Schema({
   totalPrice: {
     type: Number,
     required: true,
-    enum: ["PENDING", "COMPLETE", "FAILED", "REFUNDED"], 
-    default: "PENDING",
   },
+  paymentStatus: {
+    type: String,
+    enum: ["Pending", "Paid", "Failed", "Refunded"],
+    default: "Pending",
+  },
+  paymentMethod: String,
+  giftMessage: String,
+  recipientName: String,
+  recipientEmail: String,
   createdAt: { type: Date, default: Date.now },
-  paymentStatus: { type: String, default: "Pending" }, // or "Paid"
-  paymentMethod: String, // e.g., "Khalti", "Stripe",
-  giftMessage: { type: String },
-  recipientName: { type: String },
-  recipientEmail: { type: String },
 });
 
 module.exports = mongoose.model("Order", orderSchema);
