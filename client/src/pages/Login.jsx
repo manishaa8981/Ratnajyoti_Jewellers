@@ -2,6 +2,7 @@ import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
 
 export default function ElegantLoginForm() {
@@ -26,9 +27,10 @@ export default function ElegantLoginForm() {
         // optionally persist login in cookies or long-term storage
       }
 
+      toast.success("Logged in successfully.");
       navigate("/");
     } catch (err) {
-      alert("Login failed. Check your credentials.");
+      toast.error("Login failed. Check your credentials.");
     }
   };
 
