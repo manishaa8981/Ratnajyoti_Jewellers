@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
 import TryOnPreview from "../components/TryOnPreview";
 import { getToken, isLoggedIn } from "../utils/auth";
 
 export default function ProductDetail() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [engraving, setEngraving] = useState("");
@@ -84,9 +86,20 @@ export default function ProductDetail() {
   return (
     <div>
       <Navbar />
+
       <div className="pb-32">
         {/* Top: Name + Price + Meta */}
         <div className="text-center mt-5 mb-6">
+          <div className="max-w-6xl mx-auto px-4 mt-6">
+            <button
+              onClick={() => navigate(-1)} // 👈 Goes back to previous page
+              className="text-sm text-gray-600 hover:text-gold-800 transition flex items-center gap-2"
+            >
+              <span className="text-xl">
+                <IoArrowBack />
+              </span>
+            </button>
+          </div>
           <h1 className="text-3xl font-bold">{product.name}</h1>
           <p className="text-xl text-gray-700 mt-1">
             Rs. {product.price.toLocaleString()}
