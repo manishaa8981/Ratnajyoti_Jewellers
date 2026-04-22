@@ -3,12 +3,12 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { FaQuestionCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import CategoryGrid from "../components/categoryGrid";
-import CollectionsShowcase from "../components/collectionShowCase";
+import CategoryGrid from "../components/CategoryGrid";
+import CollectionsShowcase from "../components/CollectionShowCase";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import NewArrivals from "../components/NewArrivals";
-import RatnajyotiWorld from "../components/ratnajyotiWorld";
+import RatnajyotiWorld from "../components/RatnajyotiWorld";
 import VideoCarouselBasicExample from "../components/VideoCarousel";
 
 export default function Home() {
