@@ -63,14 +63,14 @@ export default function Products() {
       <Navbar />
 
       {/* Breadcrumb */}
-      <div className="px-20 mt-6 mb-2 text-sm text-gray-600 font-medium">
+      <div className="px-4 md:px-20 mt-6 mb-2 text-sm text-gray-600 font-medium">
         Home
         {query.get("category") && ` > ${query.get("category")}`}
         {query.get("subcategory") && ` > ${query.get("subcategory")}`}
       </div>
 
-      {/* Filter Toggle (Mobile/Desktop Button) */}
-      <div className="flex justify-between items-center px-20 mb-4">
+      {/* Filter Toggle */}
+      <div className="flex justify-between items-center px-4 md:px-20 mb-4">
         <button
           onClick={() => setShowFilter(true)}
           className="border px-6 py-2 rounded-full text-sm bg-white shadow-md hover:bg-gray-100 flex items-center gap-2"
@@ -207,7 +207,7 @@ export default function Products() {
         </div>
 
         {/* Product Grid */}
-        <div className="px-20 py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-20 z-10 relative">
+        <div className="px-4 md:px-20 py-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 lg:gap-20 z-10 relative">
           {products.length === 0 ? (
             <div className="col-span-full text-center text-gray-500 text-lg py-20">
               No jewelry available.

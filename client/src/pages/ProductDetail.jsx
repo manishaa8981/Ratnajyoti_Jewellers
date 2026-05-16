@@ -109,7 +109,7 @@ export default function ProductDetail() {
             <span>{product.weight}g</span>
           </div>
           <button
-            className="mt-4 border border-gold-800 rounded-full px-4 py-2 flex items-center gap-2 hover:bg-gold-800 hover:text-white transition"
+            className="mt-4 mx-auto border border-gold-800 rounded-full px-4 py-2 flex items-center gap-2 hover:bg-gold-800 hover:text-white transition"
             onClick={() => setShowTryOn((prev) => !prev)}
           >
             <span>📸</span>
@@ -181,22 +181,18 @@ export default function ProductDetail() {
           {/* Right: Details */}
           <div className="space-y-7">
             {/* Tabs */}
-            <div className="flex space-x-4 mt-2">
+            <div className="flex space-x-2 md:space-x-4 mt-2">
               <button
-                className={`px-16 py-2 rounded-full border ${
-                  activeTab === "details"
-                    ? "bg-gold-800 text-white"
-                    : "border-gray-400 text-gray-700"
+                className={`flex-1 md:flex-none px-4 md:px-16 py-2 rounded-full border text-sm md:text-base ${
+                  activeTab === "details" ? "bg-gold-800 text-white" : "border-gray-400 text-gray-700"
                 }`}
                 onClick={() => setActiveTab("details")}
               >
                 Product Details
               </button>
               <button
-                className={`px-16 py-2 rounded-full border ${
-                  activeTab === "price"
-                    ? "bg-gold-800 text-white"
-                    : "border-gray-400 text-gray-700"
+                className={`flex-1 md:flex-none px-4 md:px-16 py-2 rounded-full border text-sm md:text-base ${
+                  activeTab === "price" ? "bg-gold-800 text-white" : "border-gray-400 text-gray-700"
                 }`}
                 onClick={() => setActiveTab("price")}
               >

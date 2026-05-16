@@ -77,7 +77,7 @@ export default function ProductCard({ product, isLoggedIn }) {
         </button>
 
         {/* Product Image */}
-        <div className="w-full h-[350px] bg-[#F7F7F7] overflow-hidden shadow-md hover:shadow-lg rounded-2xl relative">
+        <div className="w-full h-[220px] sm:h-[280px] md:h-[350px] bg-[#F7F7F7] overflow-hidden shadow-md hover:shadow-lg rounded-2xl relative">
           <img
             src={`${import.meta.env.VITE_API_URL}/uploads/${product.images?.[0]}`}
             alt={product.name}
