@@ -1,0 +1,258 @@
+[{
+  "_id": {
+    "$oid": "6855991637fa33eb988aa0a0"
+  },
+  "userId": {
+    "$oid": "685597e237fa33eb988aa094"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "6855986737fa33eb988aa09a"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "6855991637fa33eb988aa0a1"
+      }
+    }
+  ],
+  "totalPrice": 15000,
+  "createdAt": {
+    "$date": "2025-06-20T17:23:34.169Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6866b36715f296ba6677bd5b"
+  },
+  "userId": {
+    "$oid": "685ba4b736a00485c6128a84"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "68627262d0f1d86f8f9fd84c"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "6866b36715f296ba6677bd5c"
+      }
+    },
+    {
+      "productId": {
+        "$oid": "6866b047482c40aacb7a2f0a"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "6866b36715f296ba6677bd5d"
+      }
+    }
+  ],
+  "totalPrice": 0,
+  "paymentStatus": "Pending",
+  "createdAt": {
+    "$date": "2025-07-03T16:44:23.908Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68756b6b11fcbe5ebd547fcc"
+  },
+  "userId": {
+    "$oid": "685ba4b736a00485c6128a84"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "68681a57c3c098dbd6c77b25"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "68756b6b11fcbe5ebd547fcd"
+      }
+    }
+  ],
+  "totalPrice": 280013,
+  "paymentStatus": "Pending",
+  "createdAt": {
+    "$date": "2025-07-14T20:41:15.676Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68756c5511fcbe5ebd547feb"
+  },
+  "userId": {
+    "$oid": "685ba4b736a00485c6128a84"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "68681a57c3c098dbd6c77b25"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "68756c5511fcbe5ebd547fec"
+      }
+    }
+  ],
+  "totalPrice": 280013,
+  "paymentStatus": "Pending",
+  "createdAt": {
+    "$date": "2025-07-14T20:45:09.225Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68756cb611fcbe5ebd548026"
+  },
+  "userId": {
+    "$oid": "685ba4b736a00485c6128a84"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "68681a57c3c098dbd6c77b25"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "68756cb611fcbe5ebd548027"
+      }
+    }
+  ],
+  "totalPrice": 280013,
+  "paymentStatus": "Pending",
+  "createdAt": {
+    "$date": "2025-07-14T20:46:46.669Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6875739f545603508aafb702"
+  },
+  "userId": {
+    "$oid": "685ba4b736a00485c6128a84"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "686aae49071c4e1031ddd5fb"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "6875739f545603508aafb703"
+      }
+    }
+  ],
+  "totalPrice": 678400,
+  "paymentStatus": "Pending",
+  "createdAt": {
+    "$date": "2025-07-14T21:16:15.936Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "687573b4545603508aafbb28"
+  },
+  "userId": {
+    "$oid": "685ba4b736a00485c6128a84"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "686aae49071c4e1031ddd5fb"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "687573b4545603508aafbb29"
+      }
+    }
+  ],
+  "totalPrice": 678400,
+  "paymentStatus": "Pending",
+  "createdAt": {
+    "$date": "2025-07-14T21:16:36.948Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "687573ec545603508aafbea3"
+  },
+  "userId": {
+    "$oid": "685ba4b736a00485c6128a84"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "6868ed587353e6fb7687c9af"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "687573ec545603508aafbea4"
+      }
+    }
+  ],
+  "totalPrice": 44289,
+  "paymentStatus": "Pending",
+  "createdAt": {
+    "$date": "2025-07-14T21:17:32.692Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "687a0f5d65f6355846a55c0a"
+  },
+  "userId": {
+    "$oid": "687772736c07d161f5d55da8"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "6868e7c07353e6fb7685086a"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "687a0f5d65f6355846a55c0b"
+      }
+    }
+  ],
+  "totalPrice": 345868,
+  "paymentStatus": "Pending",
+  "createdAt": {
+    "$date": "2025-07-18T09:09:49.656Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "687b7e822fd6b21fd5b047d7"
+  },
+  "userId": {
+    "$oid": "687772736c07d161f5d55da8"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "6868e7c07353e6fb7685086a"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "687b7e822fd6b21fd5b047d8"
+      }
+    }
+  ],
+  "totalPrice": 345868,
+  "paymentStatus": "Pending",
+  "createdAt": {
+    "$date": "2025-07-19T11:16:18.797Z"
+  },
+  "__v": 0
+}]

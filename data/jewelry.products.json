@@ -1,0 +1,632 @@
+[{
+  "_id": {
+    "$oid": "68628ed5d0f1d86f8f9fd876"
+  },
+  "name": "Alluring Teardrop Drop Earrings",
+  "description": "These enchanting 22 Karat gold drop earrings feature an artistic design that forms the shape of a teardrop with a pearl-shaped bead hanging at the bottom.",
+  "weight": "3.177g",
+  "price": 36620,
+  "category": "Gold",
+  "subcategory": "Earring",
+  "images": [
+    "1752385151465-alluring.webp",
+    "1752385151466-earing1_.jpg",
+    "1752385151467-earring.png",
+    "1752385151468-earing1__.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "__v": 0,
+  "tryOnOverlay": "1752385151463-aluring_png.png",
+  "tryOnType": "earring"
+},
+{
+  "_id": {
+    "$oid": "68637e93ec88713d26f89376"
+  },
+  "name": "Yellow Gold Necklace Set",
+  "description": "22 Karat Yellow Gold Necklace Set with Teardrop Design and Rawa Balls\n\nThis 22 Karat yellow gold Necklace set consist of a pair of drop earrings and a necklace. The front design of the necklace showcases clusters of Rawa balls, stylised leaves and a teardrop pendant. Open filigree work, diamond-cut patterns and Rawa balls adorn the teardrop motif. The chain on the front is connected to the chains at the back through O-rings. One of the circular chain ends features a J-hook for fastening purpose. The earring design features mini teardrop elements, two stylised leaves and Rawa balls on the base. Through an O-ring, a teardrop element, which matches the design of the pendant, is suspended. The earrings are safe and comfortable to wear as they are fitted with screw posts and Bombay screw closures. Due to its high-polished finished, the necklace set looks shiny. ",
+  "weight": "15.757 gm",
+  "price": 27950,
+  "category": "Gold",
+  "subcategory": "Necklace",
+  "images": [
+    "1751350931751-Yellow_Gold_Necklace_Set.png",
+    "1751350931752-Yellow_Gold_Necklace_Set__.webp",
+    "1751350931752-Yellow_Gold_Necklace_Set_.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "necklace",
+  "tryOnOverlay": "1751360057158-yellow_gold_necklace_set.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6863bb2dacf37c0b0f20a101"
+  },
+  "name": "Melody Diamond Finger Ring",
+  "description": "Chic 18 Karat yellow gold Finger Ring with a graceful swirl design, enhanced by shimmering Diamonds.\n\nThis sophisticated Finger Ring features a unique swirl design that elegantly wraps around the finger. Perfect for special occasions, engagements, or as a fashionable everyday accessory.",
+  "weight": "1.509g",
+  "price": 70550,
+  "category": "Diamond",
+  "subcategory": "Ring",
+  "images": [
+    "1751366573584-MelodyDiamondFingerRing_.png",
+    "1751366573585-MelodyDiamondFingerRing.jpg",
+    "1751366573585-MelodyDiamondFingerRing__.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "ring",
+  "tryOnOverlay": "1751366573586-MelodyDiamondFingerRing_.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686815a9ab180039598e947b"
+  },
+  "name": "Girlish Star Shaped Gold Stud Earrings",
+  "description": "Shining Star Shape Stud Earrings crafted in 22 Karat Yellow Gold for a radiating child's casual style statement.\n\nFlaunt your style by pairing your modern wear with these stunning Gold Stud earrings.",
+  "weight": "2.012",
+  "price": 57050,
+  "category": "Diamond",
+  "subcategory": "Earring",
+  "images": [
+    "1751651753323-GirlishStarShapedGoldStudEarrings.png",
+    "1751651753328-GirlishStarShapedGoldStudEarrings_.webp",
+    "1751651753332-GirlishStarShapedGoldStudEarrings__.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "earring",
+  "tryOnOverlay": "1752564829184-GirlishStarShapedGoldStudEarringspng.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686817d1c3c098dbd6c6fefd"
+  },
+  "name": "Petal Play Gold Bangles for Kids",
+  "description": "Petals dance with shine in this set of 2 Bangles for Kids in 22 karat yellow gold, where soft curves and polished dots.\n\nWith floral sprigs and shining touches dancing in a neat rhythm, this set of 2 kids� Bangles bring delight to festive wear and pair adorably with a bright ghagra or embroidered frock.",
+  "weight": "8.49",
+  "price": 124680,
+  "category": "Gold",
+  "subcategory": "Bangles",
+  "images": [
+    "1751652305483-PetalPlayGoldBanglesforKids.png",
+    "1751652305483-PetalPlayGoldBanglesforKids_.webp",
+    "1751652305484-PetalPlayGoldBanglesforKids__.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "bangles",
+  "tryOnOverlay": "1751652305484-PetalPlayGoldBanglesforKids.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68681985c3c098dbd6c7560d"
+  },
+  "name": "Sleek Gold Bangle",
+  "description": "Choose simplicity and elegance with this minimally designed sleek gold bangle, meticulously crafted in 22 karat yellow gold.\n\nIndulge in comfort with this sleek gold bangle that gracefully adorns your wrists. Its delicate design is perfect for office wear, inspiring your colleagues to seek a similar touch of elegance for themselves.",
+  "weight": "8.49",
+  "price": 111367,
+  "category": "Gold",
+  "subcategory": "Bangles",
+  "images": [
+    "1751652741267-SleekGoldBangle.webp",
+    "1751652741267-SleekGoldBangle_.webp",
+    "1751652741268-SleekGoldBangle__.png"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "bangles",
+  "tryOnOverlay": "1751652741269-SleekGoldBangle__.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68681a57c3c098dbd6c77b25"
+  },
+  "name": "Unparalleled Sophistication Bangles",
+  "description": "Embrace your femininity with these striking gold bangles in 22 karat yellow gold, delicate and elegant pieces that exude grace.\n\nMake a bold statement with these eye-catching gold bangles, guaranteed to turn heads wherever you go. Crafted for the woman who appreciates unparalleled style and sophistication.",
+  "weight": "25.027",
+  "price": 280013,
+  "category": "Gold",
+  "subcategory": "Bangles",
+  "images": [
+    "1751652951264-UnparalleledSophisticationBangles.png",
+    "1751652951267-UnparalleledSophisticationBangles_.webp",
+    "1751652951267-UnparalleledSophisticationBangles__.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "bangles",
+  "tryOnOverlay": "1751652951267-UnparalleledSophisticationBangles.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68689da9c417764ceef37093"
+  },
+  "name": "Magnificient Floral Bangle\n",
+  "description": "Embrace your femininity with these striking gold bangles in 22 karat yellow gold, delicate and elegant pieces that exude grace.\n\nMake a bold statement with these eye-catching gold bangles, guaranteed to turn heads wherever you go. Crafted for the woman who appreciates unparalleled style and sophistication.",
+  "weight": "19.123",
+  "price": 222908,
+  "category": "Gold",
+  "subcategory": "Bangles",
+  "images": [
+    "1751686569791-MagnificientFloralBangle.png",
+    "1751686569794-MagnificientFloralBangle_.webp",
+    "1751686569795-MagnificientFloralBangle__.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "bangles",
+  "tryOnOverlay": "1752344792945-Magnificient_Floral_Bangle_png.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6868a430c417764ceef47b87"
+  },
+  "name": "Captivating Gold Choker Necklace Set",
+  "description": "Inspired by the blooming flower, this magnificent Choker for the North Indian Bride Crafted in 22 Karat Yellow Gold will liven up your Bridal Wear.\n\nAdd opulence to your Bridal Wear with this Gold Choker Necklace Set",
+  "weight": "35.037",
+  "price": 440224,
+  "category": "Gold",
+  "subcategory": "Necklace",
+  "images": [
+    "1751688240023-CaptivatingGoldChokerNecklaceSet_.png",
+    "1751688240029-CaptivatingGoldChokerNecklaceSet.webp",
+    "1751688240030-CaptivatingGoldChokerNecklaceSet__.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "necklace",
+  "tryOnOverlay": "1752527469417-haar2.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6868a52ac417764ceef4a9a3"
+  },
+  "name": "Dreaming of Beaches Necklace Set",
+  "description": "Tiny shiny rounds with dangling shell-designs, this 22 karat yellow gold choker necklace set with cutesy earrings is a must have for your collection.\n\nAll that a traditional outfit needs is this beautiful and intricate choker necklace set which is inspired by the stunning sea shells lining the beaches. Wear this outfit with kurtas, sarees, or indo-western attire to glam up your look and look wow.",
+  "weight": "23.536",
+  "price": 275450,
+  "category": "Gold",
+  "subcategory": "Necklace",
+  "images": [
+    "1751688490618-DreamingofBeachesNecklaceSet.png",
+    "1751688490632-DreamingofBeachesNecklaceSet_.webp",
+    "1751688490633-DreamingofBeachesNecklaceSet__.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "necklace",
+  "tryOnOverlay": "1751688490635-DreamingofBeachesNecklaceSet.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6868a99ec417764ceef60f12"
+  },
+  "name": "Mesmerising Floral Gold Necklace Set",
+  "description": "Capture the beauty of blooming flower with this grand Necklace set crafted in 22 karat yellow gold\n\nBloom in the glory of floral motif on this magnificent Necklace set. If you're feeling particularly grand and elegant, this is a must have piece of jewellery for your special day.",
+  "weight": "33.234",
+  "price": 378628,
+  "category": "Gold",
+  "subcategory": "Necklace",
+  "images": [
+    "1751689630075-MesmerisingFloralGoldNecklaceSet.png",
+    "1751689630080-MesmerisingFloralGoldNecklaceSet_.webp",
+    "1751689630083-MesmerisingFloralGoldNecklaceSet__.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "necklace",
+  "tryOnOverlay": "1752527261421-haar.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6868e7c07353e6fb7685086a"
+  },
+  "name": "Geometric Chic Gold & Diamond Necklace",
+  "description": "Delight in the beauty of this 18 Kt yellow gold necklace, features a stunning geometric design with intricate detailing that drapes gracefully across the neckline. Perfect for a contemporary touch.",
+  "weight": "14.175",
+  "price": 345868,
+  "category": "Diamond",
+  "subcategory": "Necklace",
+  "images": [
+    "1751705536853-GeometricChicGoldDiamondNecklace_.webp",
+    "1751705536855-GeometricChicGoldDiamondNecklace__.jpg",
+    "1751705536856-GeometricChicGoldDiamondNecklace.png"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "necklace",
+  "tryOnOverlay": "1751705536857-GeometricChicGoldDiamondNecklace.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6868e8d17353e6fb768591ec"
+  },
+  "name": "Soft Radiance Diamond Necklace Set",
+  "description": "Like poetry traced in gold, this 18 Karat yellow gold sculpted necklace set wraps her in layered vines, floating natural Diamonds, and the softness of sheer jali light.\n\nFor nights that feel like a dream remembered, this two-layered marvel Necklace Set drapes her in sculpted vines, floating pav natural Diamonds, and delicate 3D jali. Its matte-finished grace mirrors her elegance, unfolding softly at brunches or receptions. As the clasp clicks into place, so does your confidence- layered, luminous, and absolutely flauntworthy.",
+  "weight": "32.12",
+  "price": 479808,
+  "category": "Diamond",
+  "subcategory": "Necklace",
+  "images": [
+    "1751705809955-SoftRadianceDiamondNecklaceSet.webp",
+    "1751705809956-SoftRadianceDiamondNecklaceSet_.webp",
+    "1751705809957-SoftRadianceDiamondNecklaceSet__.png"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "necklace",
+  "tryOnOverlay": "1751705809958-SoftRadianceDiamondNecklaceSet__.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6868ea757353e6fb768662de"
+  },
+  "name": "Gilded Whisper Diamond Necklace Set",
+  "description": "Like poetry traced in gold, this 18 Karat yellow gold sculpted necklace set wraps her in layered vines, floating natural Diamonds, and the softness of sheer jali light.\n\nFor nights that feel like a dream remembered, this two-layered marvel Necklace Set drapes her in sculpted vines, floating pav natural Diamonds, and delicate 3D jali. Its matte-finished grace mirrors her elegance, unfolding softly at brunches or receptions. As the clasp clicks into place, so does your confidence- layered, luminous, and absolutely flauntworthy.",
+  "weight": "24.418",
+  "price": 401456,
+  "category": "Diamond",
+  "subcategory": "Necklace",
+  "images": [
+    "1751706229328-GildedWhisperDiamondNecklace_.webp",
+    "1751706229329-GildedWhisperDiamondNecklace___.webp",
+    "1751706229329-GildedWhisperDiamondNecklace__.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "necklace",
+  "tryOnOverlay": "1751706229330-GildedWhisperDiamondNecklace.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6868ed587353e6fb7687c9af"
+  },
+  "name": "Dazzling Halo Diamond Finger Ring",
+  "description": "Elegance meets brilliance with this 18 Karat rose gold Finger Ring, featuring a natural Diamond halo set on a split shank band.\n\nCapture the essence of luxury with this Finger Ring, featuring a dazzling halo of Diamonds surrounding a brilliant centre stone on a split shank band. Perfect for adding elegance to every moment.",
+  "weight": "1.98",
+  "price": 44289,
+  "category": "Diamond",
+  "subcategory": "Ring",
+  "images": [
+    "1751706968685-DazzlingHaloDiamondFingerRing_.webp",
+    "1751706968688-DazzlingHaloDiamondFingerRing__.webp",
+    "1751706968689-DazzlingHaloDiamondFingerRing.png"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "ring",
+  "tryOnOverlay": "1751706968691-DazzlingHaloDiamondFingerRing.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6868ee5c7353e6fb768845d0"
+  },
+  "name": "Alluring Gold Beaded Finger Ring",
+  "description": "This classically inspired 22 Karat gold ring shows a ringed central bead flanked by six beads, held by striated bands with 6 beads on the periphery.\n",
+  "weight": "4.07",
+  "price": 44289,
+  "category": "Gold",
+  "subcategory": "Ring",
+  "images": [
+    "1751707228601-AlluringGoldBeadedFingerRing_.webp",
+    "1751707228602-AlluringGoldBeadedFingerRing__.webp",
+    "1751707228602-AlluringGoldBeadedFingerRing.png"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "ring",
+  "tryOnOverlay": "1752526650653-AlluringGoldBeadedFingerRing.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68696b16b1a8f7ee7aa310e3"
+  },
+  "name": "Dainty Peacock Gold Drop Earrings",
+  "description": "Add a subtle touch of ethereal beauty to your ensemble with this peacock inspired pair of drop earrings crafted in 22 Karat Yellow Gold.\n\nExude timeless class when you adorn this pair of gold drop earrings with your occasion ensembles featuring a design inspired by the peacock.",
+  "weight": "2.468",
+  "price": 28544,
+  "category": "Gold",
+  "subcategory": "Earring",
+  "images": [
+    "1751739158107-DaintyPeacockGoldDropEarrings_.webp",
+    "1751739158109-DaintyPeacockGoldDropEarrings__.webp",
+    "1751739158109-DaintyPeacockGoldDropEarrings___.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "earring",
+  "tryOnOverlay": "1751739158110-DaintyPeacockGoldDropEarrings.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686aae49071c4e1031ddd5fb"
+  },
+  "name": "Graceful Diamond Hoop Earrings",
+  "description": "Add a subtle grace to your outfit with these huggies hoop earrings, crafted in 18 karat rose gold, studded with diamonds. Stone Clarity: SI2\n\nCast a spell of enchantment on everyone with these stunning petite hoop earrings. They're the perfect addition to your ethnic attire.",
+  "weight": "3.43",
+  "price": 678400,
+  "category": "Earrings",
+  "subcategory": "Hoops",
+  "images": [
+    "1751821897851-GracefulDiamondHoopEarrings.webp",
+    "1751821897853-GracefulDiamondHoopEarrings_.webp",
+    "1751821897855-GracefulDiamondHoopEarrings___.webp",
+    "1751821897856-GracefulDiamondHoopEarrings__.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "earring",
+  "tryOnOverlay": "1751821897855-GracefulDiamondHoopEarringsp.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686aaff1071c4e1031de3136"
+  },
+  "name": "Geo-Edge Gold Hoop Earrings",
+  "description": "Break the usual with this pair of 22 Karat yellow gold Hoop Earrings featuring a clean-cut octagonal form and bold ridged texture for added flair.\n\nBuilt for modern wear, these Hoop Earrings bring structure and edge with their sleek lines and confident silhouette that power up any contemporary outfit.",
+  "weight": "7.476",
+  "price": 87569,
+  "category": "Earrings",
+  "subcategory": "Hoops",
+  "images": [
+    "1751822321475-Geo-EdgeGoldHoopEarrings_.webp",
+    "1751822321475-Geo-EdgeGoldHoopEarrings__.webp",
+    "1751822321476-Geo-EdgeGoldHoopEarrings___.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "earring",
+  "tryOnOverlay": "1751822321477-Geo-EdgeGoldHoopEarrings.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686ab15e071c4e1031de8769"
+  },
+  "name": "Golden Ruffles Gold Drop Earrings",
+  "description": "Light up the room in these 22 karat yellow gold Drop Earrings featuring layered crescent loops, floral accents, and textured fan details.\n\nPerfect for traditional occasions or statement styling, these Drop Earrings blend heritage elements with ruffled layers that sway with charm and confidence.",
+  "weight": "16.828",
+  "price": 83750,
+  "category": "Earrings",
+  "subcategory": "Drops",
+  "images": [
+    "1751822686986-GoldenRuffleGoldDropEarrings_.jpg",
+    "1751822686987-GoldenRuffleGoldDropEarrings__.webp",
+    "1751822686988-GoldenRuffleGoldDropEarrings___.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "earring",
+  "tryOnOverlay": "1751822686988-GoldenRuffleGoldDropEarrings.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686ab5a7071c4e1031df6d40"
+  },
+  "name": "Stellar Maze Diamond Drop Earrings",
+  "description": "Sculpted to stand out! These 18 Karat yellow gold Drop Earrings flaunt diamond-studded double rhombus frames for a bold and contemporary vibe.\n\nAdd a sharp sparkle to your evening edits with these edgy diamond Drop Earrings. The angular openwork rhombus design pairs well with sleek blazers, saris, or co-ord sets-making it a go-to piece for cocktails, art shows, or stylish work events. ",
+  "weight": "16.828",
+  "price": 34999,
+  "category": "Earrings",
+  "subcategory": "Drops",
+  "images": [
+    "1751823783385-StellarMazeDiamondDropEarrings_.webp",
+    "1751823783385-StellarMazeDiamondDropEarrings___.webp",
+    "1751823783386-StellarMazeDiamondDropEarrings__.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "earring",
+  "tryOnOverlay": "1751823783386-StellarMazeDiamondDropEarrings.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686ab8b3071c4e1031e073a5"
+  },
+  "name": "Intricate Gold Finger Ring",
+  "description": "Enhance your style with this intricate 22 Karat yellow gold Finger Ring, featuring a detailed floral design.\n\nIdeal for a casual day out or a festive occasion, this intricate floral Finger Ring brings a touch of nature�s beauty to your finger. Its delicate design and high craftsmanship make it a piece to cherish daily.",
+  "weight": "5.864",
+  "price": 66324,
+  "category": "Rings",
+  "subcategory": "Engagement",
+  "images": [
+    "1751824563922-IntricateGoldFingerRing_.webp",
+    "1751824563923-IntricateGoldFingerRing__.webp",
+    "1751824563923-IntricateGoldFingerRing___.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "ring",
+  "tryOnOverlay": "1751824563924-IntricateGoldFingerRing.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686abab7071c4e1031e0feac"
+  },
+  "name": "Fancy Glossy Gold and Diamond Finger Ring",
+  "description": "Timeless and supreme, this 18 Karat Yellow Gold diamond finger ring comes with a fine glossy finish. Stone Clarity SI2\n\nIlluminate your workwear with the timeless brilliance of this diamond and gold finger ring!",
+  "weight": "1.755",
+  "price": 37756,
+  "category": "Rings",
+  "subcategory": "Engagement",
+  "images": [
+    "1751825079604-FancyGlosy_.webp",
+    "1751825079605-FancyGlosy__.webp",
+    "1751825079607-FancyGlosy___.webp",
+    "1751825079609-FancyGlosy____.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "ring",
+  "tryOnOverlay": "1751825079607-FancyGlosy.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686abde7071c4e1031e199e4"
+  },
+  "name": "Exquisite Floral Diamond Mangalsutra",
+  "description": "Floral diamond mangalsutra set in 18 karat yellow gold. The timeless beauty of this piece symbolises your timeless love. Stone Clarity: SI2\n\nFloral motifs are elegantly arranged to form this stunning mangalsutra. Its beauty is timeless and exquisite, just like that of your bond.",
+  "weight": "6.773",
+  "price": 35000,
+  "category": "Wedding",
+  "subcategory": "Mangalsutra",
+  "images": [
+    "1751825895447-mangalsutra1_.jpg",
+    "1751825895448-mangalsutra1__.webp",
+    "1751825895452-mangalsutra1___.webp",
+    "1751825895452-mangalsutra1____.jpg"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "necklace",
+  "tryOnOverlay": "1751825895452-mangalsutra1.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686abee2071c4e1031e1dde8"
+  },
+  "name": "Graceful Emerald Vilandi Mangalsutra",
+  "description": "Express your traditional values with this graceful vilandi mangalsutra, crafted in 18 karat yellow gold, studded with emerald\n\nShimmering with elegance, this floral mangalsutra is made for the elegant Gujarati bride. Though petite, it is richly detailed to bring abundant beauty and joy!",
+  "weight": "14.456",
+  "price": 38000,
+  "category": "Wedding",
+  "subcategory": "Mangalsutra",
+  "images": [
+    "1751826146499-mangalsutra2_.jpg",
+    "1751826146501-mangalsutra2__.webp",
+    "1751826146501-mangalsutra2___.webp",
+    "1751826146504-mangalsutra2____.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "necklace",
+  "tryOnOverlay": "1751826146504-mangalsutra2.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6872a82c5c706e8fc89add23"
+  },
+  "name": "Sparkling Boxes Tennis Bracelet",
+  "description": "Wrap boxes of sparkles around your wrist when you adorn this gorgeous bracelet in rose gold.\n\nCatch a glint of timeless elegance in the classy designs that are here to stay, from our Into Eternity collection!",
+  "weight": "10.732",
+  "price": 27380,
+  "category": "Diamond",
+  "subcategory": "Bracelet",
+  "images": [
+    "1752344620536-SparklingBoxesTennisBracelet_.webp",
+    "1752344620537-SparklingBoxesTennisBracelet__.webp",
+    "1752344620537-SparklingBoxesTennisBracelet___.webp",
+    "1752344620539-SparklingBoxesTennisBracelet____.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "bangles",
+  "tryOnOverlay": "1752344620538-bracelet.jpeg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6872adfa5c706e8fc89ae0be"
+  },
+  "name": "Abstract Cutout Diamond Ring",
+  "description": "Bold yet minimal, this diamond-studded open-frame ring is crafted in 18 Karat yellow gold with oval cutouts and sleek detailing for a contemporary look.\n\nPerfect for everyday hustle, this geometric diamond ring adds a fresh vibe to casual shirts or flowy dresses. Because jewellery that feels light, looks sleek, and sparkles bright is always a keeper.",
+  "weight": "1.493",
+  "price": 23380,
+  "category": "Diamond",
+  "subcategory": "Ring",
+  "images": [
+    "1752346106829-Abstract_Cutout_Diamond_Ring_.webp",
+    "1752346106830-Abstract_Cutout_Diamond_Ring__.webp",
+    "1752346106830-Abstract_Cutout_Diamond_Ring___.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "ring",
+  "tryOnOverlay": "1752346106830-ring.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6875fb56a84546f1cbf6a56c"
+  },
+  "name": "Spellbinding Gold Nose Pin",
+  "description": "Accentuate your Charm and Grace with this Classy Nose Nathini for all Indian Brides, Perfect for Bridal Wear. Crafted in 22 Karat Yellow Gold.\n\nOn days when you need that extra little push, take help from the dazzle of these stud earrings featuring a floral designed embellished with diamonds.",
+  "weight": "9.455",
+  "price": 115890,
+  "category": "Wedding",
+  "subcategory": "Nose Pin",
+  "images": [
+    "1752562518497-SpellbindingGoldNosePin.webp",
+    "1752562518503-SpellbindingGoldNosePin_.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnOverlay": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "687600fea84546f1cbf734a6"
+  },
+  "name": "Gold and Diamond Nose Pin",
+  "description": "Made exclusively special with dazzling diamond embellishments, this nose pin is crafted in 18 Karat Yellow Gold. Stone Clarity I1I2\n\nYou're bound to be the talk of the party when you flash this bright and beautiful rose nose pin with stunning diamond embellishments.",
+  "weight": "0.42",
+  "price": 13290,
+  "category": "Wedding",
+  "subcategory": "Nose Pin",
+  "images": [
+    "1752563966668-gold-diamond-nose-pin.webp",
+    "1752563966689-gold-diamond-.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnOverlay": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "687602a3a84546f1cbf789cd"
+  },
+  "name": "Textured Glow Diamond Ring",
+  "description": "A smooth twist of 18 Karat yellow gold adorned with natural diamonds, this ring is framed by rope-textured edges to lend a refined spark to everyday moments.\n\nFor everyday sparkle with a twist, this natural Diamond ring is ideal for daily wear, work chic, or stacking with minimal modern rings for a subtle standout.",
+  "weight": "3.567",
+  "price": 45120,
+  "category": "Rings",
+  "subcategory": "Casual",
+  "images": [
+    "1752564387665-TexturedGlowDiamondRing.webp",
+    "1752564387667-TexturedGlowDiamondRing_.webp",
+    "1752564387667-TexturedGlowDiamondRing__.webp"
+  ],
+  "inStock": true,
+  "sizeOptions": [],
+  "tryOnType": "ring",
+  "tryOnOverlay": "1752564387671-TexturedGlowDiamondRingpng.png",
+  "__v": 0
+}]

@@ -1,7 +1,7 @@
-import axios from "axios";
 import jsPDF from "jspdf";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { getToken } from "../utils/auth";
 
 export default function KhaltiSuccessPage() {
@@ -55,8 +55,8 @@ export default function KhaltiSuccessPage() {
       }
 
       try {
-        const res = await axios.post(
-          "http://localhost:5001/api/khalti/lookup",
+        const res = await api.post(
+          "/api/khalti/lookup",
           { pidx }
         );
 
@@ -64,7 +64,7 @@ export default function KhaltiSuccessPage() {
           setStatus("✅ Payment successful! Generating invoice...");
 
           // ✅ FETCH CART ITEMS
-          const cartRes = await axios.get("http://localhost:5001/api/cart", {
+          const cartRes = await api.get("/api/cart", {
             headers: { Authorization: `Bearer ${token}` },
           });
 
@@ -85,7 +85,7 @@ export default function KhaltiSuccessPage() {
           });
 
           // ✅ CLEAR CART
-          await axios.delete("http://localhost:5001/api/cart/clear", {
+          await api.delete("/api/cart/clear", {
             headers: { Authorization: `Bearer ${token}` },
           });
 

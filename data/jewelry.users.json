@@ -1,0 +1,60 @@
+[{
+  "_id": {
+    "$oid": "6855976537fa33eb988aa090"
+  },
+  "name": "Test User",
+  "email": "test@example.com",
+  "password": "$2b$10$1L2vWhOLutB0/2vjrgN74.7yA7DDSERFdYVHYJUXN9UHrdshRVjx2",
+  "isAdmin": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "685597e237fa33eb988aa094"
+  },
+  "name": "admin",
+  "email": "admin@gmail.com",
+  "password": "$2b$10$7veDcOLzcBIC6hR7OytQve5nY6s7AJyeXpBKQK8ZKj5gyn1jfpjZ2",
+  "isAdmin": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "685ba4b736a00485c6128a84"
+  },
+  "name": "Manisha Shah",
+  "email": "manishaa8981@gmail.com",
+  "password": "$2b$10$0hzARSF34XQDd7l.HziUvOzJxhRXtRfwsW3BTOlf8YDj4tl6Ztrxm",
+  "isAdmin": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6873ee182af189ade1eddaf6"
+  },
+  "name": "Richa",
+  "email": "richa@gmail.com",
+  "password": "$2b$10$wIi3Xe5rhb4UZ3DlUjjdzOxUeTI9ecuqeBjnocDmt3DKFiMhYLYWK",
+  "isAdmin": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6873f1f140d2490594705f42"
+  },
+  "name": "Saiyaara",
+  "email": "aa@gmail.com",
+  "password": "$2b$10$fHtmHIJBWvx0NI7550DwL.PaZDNG/FAWIL17XvmXzdHpumXH8i0XK",
+  "isAdmin": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "687772736c07d161f5d55da8"
+  },
+  "name": "Rita",
+  "email": "manishashah.8981@gmail.com",
+  "password": "$2b$10$.m8H7OVSGuMfh59Ip2nLLefHpuiebN3bvfnwOqghVFw7Nv.Xd6eDi",
+  "isAdmin": false,
+  "__v": 0
+}]

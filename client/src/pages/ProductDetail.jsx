@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
@@ -25,8 +24,8 @@ export default function ProductDetail() {
     }
 
     try {
-      await axios.post(
-        "http://localhost:5001/api/cart/add",
+      await api.post(
+        "/api/cart/add",
         {
           productId: product._id,
           quantity: 1,
@@ -51,8 +50,8 @@ export default function ProductDetail() {
     }
 
     try {
-      await axios.post(
-        "http://localhost:5001/api/wishlist/add",
+      await api.post(
+        "/api/wishlist/add",
         { productId: product._id },
         { headers: { Authorization: `Bearer ${getToken()}` } }
       );
@@ -63,15 +62,15 @@ export default function ProductDetail() {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:5001/api/products/${id}`).then((res) => {
+    api.get(`/api/products/${id}`).then((res) => {
       setProduct(res.data);
     });
   }, [id]);
 
   useEffect(() => {
     const fetchSubcategories = async () => {
-      const res = await axios.get(
-        "http://localhost:5001/api/products/subcategories"
+      const res = await api.get(
+        "/api/products/subcategories"
       );
       const ringSubs = res.data.filter((sub) =>
         sub.toLowerCase().includes("ring")
@@ -158,7 +157,7 @@ export default function ProductDetail() {
           {/* Left: Image Viewer */}
           <div>
             <img
-              src={`http://localhost:5001/uploads/${product.images?.[activeImageIndex]}`}
+              src={`${import.meta.env.VITE_API_URL}/uploads/${product.images?.[activeImageIndex]}`}
               alt={product.name}
               className="w-full h-[400px] object-cover rounded-xl"
             />
@@ -166,7 +165,7 @@ export default function ProductDetail() {
               {product.images?.map((img, idx) => (
                 <img
                   key={idx}
-                  src={`http://localhost:5001/uploads/${img}`}
+                  src={`${import.meta.env.VITE_API_URL}/uploads/${img}`}
                   onClick={() => setActiveImageIndex(idx)}
                   className={`w-24 h-24 object-cover border rounded cursor-pointer ${
                     idx === activeImageIndex

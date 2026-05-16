@@ -1,9 +1,9 @@
-import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
+import api from "../utils/api";
 
 export default function ElegantLoginForm() {
   const [email, setEmail] = useState("");
@@ -15,17 +15,10 @@ export default function ElegantLoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5001/api/users/login", {
-        email,
-        password,
-      });
+      const res = await api.post("/api/users/login", { email, password });
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-
-      if (rememberMe) {
-        // optionally persist login in cookies or long-term storage
-      }
 
       toast.success("Logged in successfully.");
       navigate("/");
@@ -38,7 +31,6 @@ export default function ElegantLoginForm() {
     <div>
       <Navbar />
       <div className="h-[92.30vh] flex">
-        {/* Left side - Image */}
         <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
           <img
             src="/images/login.png"
@@ -47,7 +39,6 @@ export default function ElegantLoginForm() {
           />
         </div>
 
-        {/* Right side - Login Form */}
         <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gray-50">
           <div className="w-full max-w-md">
             <div className="text-center mb-8">
@@ -55,12 +46,8 @@ export default function ElegantLoginForm() {
             </div>
 
             <form className="space-y-6" onSubmit={handleSubmit}>
-              {/* Email Field */}
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                   Email
                 </label>
                 <input
@@ -74,12 +61,8 @@ export default function ElegantLoginForm() {
                 />
               </div>
 
-              {/* Password Field */}
               <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                   Password
                 </label>
                 <div className="relative">
@@ -102,7 +85,6 @@ export default function ElegantLoginForm() {
                 </div>
               </div>
 
-              {/* Remember Me & Forgot Password */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <input
@@ -112,10 +94,7 @@ export default function ElegantLoginForm() {
                     onChange={(e) => setRememberMe(e.target.checked)}
                     className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
                   />
-                  <label
-                    htmlFor="remember-me"
-                    className="ml-2 text-sm text-gray-700"
-                  >
+                  <label htmlFor="remember-me" className="ml-2 text-sm text-gray-700">
                     Remember me
                   </label>
                 </div>
@@ -128,7 +107,6 @@ export default function ElegantLoginForm() {
                 </button>
               </div>
 
-              {/* Login Button */}
               <button
                 type="submit"
                 className="w-full bg-bronze text-white font-medium py-3 px-4 rounded-3xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl cursor-pointer text-center"
@@ -136,11 +114,8 @@ export default function ElegantLoginForm() {
                 Login
               </button>
 
-              {/* Sign Up Link */}
               <div className="text-center">
-                <span className="text-sm text-gray-600">
-                  Don’t have an account?{" "}
-                </span>
+                <span className="text-sm text-gray-600">Don't have an account? </span>
                 <button
                   onClick={() => navigate("/register")}
                   type="button"

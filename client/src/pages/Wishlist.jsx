@@ -1,6 +1,8 @@
 import { Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
+import { getToken } from "../utils/auth";
 
 export default function WishlistPage() {
   const [wishlistItems, setWishlistItems] = useState([]);
@@ -25,8 +27,8 @@ export default function WishlistPage() {
     }
 
     try {
-      await axios.post(
-        "http://localhost:5001/api/cart/add",
+      await api.post(
+        "/api/cart/add",
         {
           productId: item._id,
           quantity: 1,
@@ -79,7 +81,7 @@ export default function WishlistPage() {
                   >
                     <td className="flex items-center gap-4 px-6 py-5">
                       <img
-                        src={`http://localhost:5001/uploads/${item.image}`}
+                        src={`${import.meta.env.VITE_API_URL}/uploads/${item.image}`}
                         alt={item.name}
                         className="w-20 h-20 rounded-md object-cover border"
                       />

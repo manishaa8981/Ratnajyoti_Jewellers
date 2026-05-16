@@ -1,5 +1,5 @@
-import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
+import api from "../utils/api";
 import { getToken } from "../utils/auth";
 
 const CartContext = createContext();
@@ -9,7 +9,7 @@ export const CartProvider = ({ children }) => {
 
   const fetchCart = async () => {
     try {
-      const res = await axios.get("http://localhost:5001/api/cart", {
+      const res = await api.get("/api/cart", {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
       setCartItems(res.data.cart || []);

@@ -15,7 +15,7 @@ export default function useHandMesh(
     const ctx = canvas.getContext("2d");
 
     const img = new Image();
-    img.src = `http://localhost:5001/uploads/${imageFile}`;
+    img.src = `${import.meta.env.VITE_API_URL}/uploads/${imageFile}`;
 
     const hands = new Hands({
       locateFile: (file) =>

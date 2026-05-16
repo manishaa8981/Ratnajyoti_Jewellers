@@ -1,6 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { IoCloseCircleSharp } from "react-icons/io5"; // for cross icon
+import { IoCloseCircleSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,7 +15,7 @@ export default function Cart() {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const res = await axios.get("http://localhost:5001/api/cart", {
+        const res = await api.get("/api/cart", {
           headers: { Authorization: `Bearer ${getToken()}` },
         });
         setCart(res.data.cart || []);
@@ -34,7 +33,7 @@ export default function Cart() {
 
   const removeFromCart = async (productId) => {
     try {
-      await axios.delete(`http://localhost:5001/api/cart/remove/${productId}`, {
+      await api.delete(`/api/cart/remove/${productId}`, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
@@ -112,7 +111,7 @@ export default function Cart() {
 
                   <div className="flex items-center gap-4">
                     <img
-                      src={`http://localhost:5001/uploads/${
+                      src={`${import.meta.env.VITE_API_URL}/uploads/${
                         item.product?.images?.[0] || "placeholder.png"
                       }`}
                       alt={item.product?.name || "Product"}
@@ -164,7 +163,7 @@ export default function Cart() {
                   {/* Product Details */}
                   <div className="flex items-center  gap-4 mb-4">
                     <img
-                      src={`http://localhost:5001/uploads/${
+                      src={`${import.meta.env.VITE_API_URL}/uploads/${
                         itemToRemove.product?.images?.[0] || "placeholder.png"
                       }`}
                       alt={itemToRemove.product?.name}

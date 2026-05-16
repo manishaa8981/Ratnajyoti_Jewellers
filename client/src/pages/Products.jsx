@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { AiOutlineDown } from "react-icons/ai";
 import { useLocation } from "react-router-dom";
@@ -40,7 +39,7 @@ export default function Products() {
         params.subcategory = query.get("subcategory");
 
       try {
-        const res = await axios.get("http://localhost:5001/api/products", {
+        const res = await api.get("/api/products", {
           params,
         });
         setProducts(res.data);

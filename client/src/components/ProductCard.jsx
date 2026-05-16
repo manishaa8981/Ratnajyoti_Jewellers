@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Heart } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -45,8 +44,8 @@ export default function ProductCard({ product, isLoggedIn }) {
     if (!isLoggedIn) return toast.warning("Please login to add to cart");
 
     try {
-      await axios.post(
-        "http://localhost:5001/api/cart/add",
+      await api.post(
+        "/api/cart/add",
         { productId: product._id, quantity: 1 },
         { headers: { Authorization: `Bearer ${getToken()}` } }
       );
@@ -79,13 +78,13 @@ export default function ProductCard({ product, isLoggedIn }) {
         {/* Product Image */}
         <div className="w-full h-[350px] bg-[#F7F7F7] overflow-hidden shadow-md hover:shadow-lg rounded-2xl relative">
           <img
-            src={`http://localhost:5001/uploads/${product.images?.[0]}`}
+            src={`${import.meta.env.VITE_API_URL}/uploads/${product.images?.[0]}`}
             alt={product.name}
             className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:-translate-x-full"
           />
           {product.images?.[1] && (
             <img
-              src={`http://localhost:5001/uploads/${product.images[1]}`}
+              src={`${import.meta.env.VITE_API_URL}/uploads/${product.images[1]}`}
               alt="hover"
               className="w-full h-full object-cover absolute top-0 left-0 transition-transform duration-500 ease-in-out transform translate-x-full group-hover:translate-x-0"
             />

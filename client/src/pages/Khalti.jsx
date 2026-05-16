@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import api from "../utils/api";
 
 export default function KhaltiSuccess() {
   const [params] = useSearchParams();
@@ -10,13 +11,10 @@ export default function KhaltiSuccess() {
   useEffect(() => {
     const verifyAndPlaceOrder = async () => {
       try {
-        const res = await axios.post("http://localhost:5001/api/khalti/verify", {
-          pidx,
-        });
+        const res = await api.post("/api/khalti/verify", { pidx });
 
         if (res.data.status === "Completed") {
           toast.success("✅ Payment Successful!");
-          // You can create order in backend now using res.data info
           navigate("/order-confirmation");
         } else {
           toast.error("⚠️ Payment not completed.");

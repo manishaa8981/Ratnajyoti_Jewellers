@@ -1,14 +1,13 @@
 import { Player } from "@lottiefiles/react-lottie-player";
-import axios from "axios";
+import jsPDF from "jspdf";
 import { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useWindowSize } from "react-use"; // for confetti
-import celebrationLottie from "../../public/lottie/Confetti.json"; // <-- you must add this Lottie file
+import { useWindowSize } from "react-use";
+import celebrationLottie from "../../public/lottie/Confetti.json";
 import Navbar from "../components/Navbar";
 import { getToken } from "../utils/auth";
-import jsPDF from "jspdf";
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
@@ -34,8 +33,8 @@ export default function CheckoutPage() {
     try {
       const orderId = `ORDER_${Date.now()}`;
 
-      const res = await axios.post(
-        "http://localhost:5001/api/khalti/initiate",
+      const res = await api.post(
+        "/api/khalti/initiate",
         {
           amount: total,
           name: recipientName || "Customer",
@@ -75,12 +74,12 @@ export default function CheckoutPage() {
         address,
       };
 
-      await axios.post("http://localhost:5001/api/orders", orderPayload, {
+      await api.post("/api/orders", orderPayload, {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
 
       // ✅ Clear cart after order
-      await axios.delete("http://localhost:5001/api/cart/clear", {
+      await api.delete("/api/cart/clear", {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
 
@@ -131,7 +130,7 @@ export default function CheckoutPage() {
   useEffect(() => {
     async function fetchCart() {
       try {
-        const res = await axios.get("http://localhost:5001/api/cart", {
+        const res = await api.get("/api/cart", {
           headers: { Authorization: `Bearer ${getToken()}` },
         });
 
