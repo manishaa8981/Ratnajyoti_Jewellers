@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
 import TryOnPreview from "../components/TryOnPreview";
+import api from "../utils/api";
 import { getToken, isLoggedIn } from "../utils/auth";
 
 export default function ProductDetail() {

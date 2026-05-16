@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../components/Navbar";
+import api from "../utils/api";
 import { getToken } from "../utils/auth";
 export default function Cart() {
   const [cart, setCart] = useState([]);

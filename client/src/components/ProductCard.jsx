@@ -2,6 +2,7 @@ import { Heart } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import api from "../utils/api";
 import { getToken } from "../utils/auth";
 
 export default function ProductCard({ product, isLoggedIn }) {

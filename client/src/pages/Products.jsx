@@ -3,6 +3,7 @@ import { AiOutlineDown } from "react-icons/ai";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import ProductCard from "../components/ProductCard";
+import api from "../utils/api";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);

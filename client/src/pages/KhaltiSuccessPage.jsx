@@ -2,6 +2,7 @@ import jsPDF from "jspdf";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import api from "../utils/api";
 import { getToken } from "../utils/auth";
 
 export default function KhaltiSuccessPage() {

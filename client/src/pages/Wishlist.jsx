@@ -2,6 +2,7 @@ import { Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
+import api from "../utils/api";
 import { getToken } from "../utils/auth";
 
 export default function WishlistPage() {

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useWindowSize } from "react-use";
 import celebrationLottie from "../../public/lottie/Confetti.json";
 import Navbar from "../components/Navbar";
+import api from "../utils/api";
 import { getToken } from "../utils/auth";
 
 export default function CheckoutPage() {
