@@ -41,7 +41,7 @@ export default function Navbar() {
         <Link to="/" className="flex-shrink-0 transform transition-transform hover:scale-105">
           <img
             src="/images/logo1.png"
-            className="h-[55px] w-auto max-w-[160px] md:h-[70px] md:max-w-[240px]"
+            className="h-[45px] w-auto md:h-[65px]"
             alt="logo"
           />
         </Link>

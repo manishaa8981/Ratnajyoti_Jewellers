@@ -109,7 +109,7 @@ export default function ProductDetail() {
             <span>{product.weight}g</span>
           </div>
           <button
-            className="mt-4 mx-auto border border-gold-800 rounded-full px-4 py-2 flex items-center gap-2 hover:bg-gold-800 hover:text-white transition"
+            className="mt-4 mb-4 mx-auto border border-gold-800 rounded-full px-4 py-2 flex items-center gap-2 hover:bg-gold-800 hover:text-white transition"
             onClick={() => setShowTryOn((prev) => !prev)}
           >
             <span>📸</span>
@@ -118,17 +118,20 @@ export default function ProductDetail() {
             </span>
           </button>
           {/* Conditional Try-On Preview */}
-          {showTryOn &&
-            (product.tryOnType && product.tryOnOverlay ? (
-              <TryOnPreview
-                imageType={product.tryOnType}
-                imageFile={product.tryOnOverlay}
-              />
-            ) : (
-              <p className="text-red-500 mt-2">
-                Try-On not available for this product.
-              </p>
-            ))}
+          {showTryOn && (
+            <div className="mt-4">
+              {product.tryOnType && product.tryOnOverlay ? (
+                <TryOnPreview
+                  imageType={product.tryOnType}
+                  imageFile={product.tryOnOverlay}
+                />
+              ) : (
+                <p className="text-red-500 mt-2">
+                  Try-On not available for this product.
+                </p>
+              )}
+            </div>
+          )}
 
           {/* or "necklace" */}
           {/* {showTryOn && (
@@ -348,30 +351,30 @@ export default function ProductDetail() {
         </div>
 
         {/* Fixed Bottom Bar */}
-        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-white border rounded-full shadow-xl px-8 py-3 flex items-center justify-between w-[90%] max-w-5xl z-50">
-          <div className="flex gap-8 text-center flex-1">
-            <div>
-              <p className="text-lg font-semibold">
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white border rounded-2xl md:rounded-full shadow-xl px-4 md:px-8 py-3 flex items-center justify-between w-[95%] max-w-5xl z-50 gap-2">
+          <div className="flex gap-3 md:gap-8 text-center flex-1 min-w-0">
+            <div className="min-w-0">
+              <p className="text-sm md:text-lg font-semibold truncate">
                 Rs. {product.price.toLocaleString()}
               </p>
             </div>
-            <div>
-              <p className="text-lg font-semibold">
-                Weight : {product.weight} g
+            <div className="min-w-0">
+              <p className="text-sm md:text-lg font-semibold truncate">
+                {product.weight}g
               </p>
             </div>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex gap-2 md:gap-4 flex-shrink-0">
             <button
               onClick={addToWishlist}
-              className="bg-white border border-gold-800 text-gold-800 font-medium px-5 py-2 rounded-full hover:bg-gold-800 hover:text-white transition"
+              className="bg-white border border-[#b6845b] text-[#b6845b] font-medium px-3 md:px-5 py-2 rounded-full text-xs md:text-sm hover:bg-[#b6845b] hover:text-white transition"
             >
               Wishlist
             </button>
             <button
               onClick={addToCart}
-              className="bg-gold-800 text-white font-medium px-6 py-2 rounded-full hover:opacity-90 transition"
+              className="bg-[#b6845b] text-white font-medium px-3 md:px-6 py-2 rounded-full text-xs md:text-sm hover:opacity-90 transition"
             >
               Add To Cart
             </button>
